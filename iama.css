@@ -1,0 +1,422 @@
+body {
+ padding-top: 0px;
+}
+.header-nav {
+ height: 100px;
+ position: fixed;
+ top: 0;
+ transition: top 0.4s ease-in-out;
+ width: 100%;
+ z-index: 2000;
+}
+.nav-down {
+top: 0px;
+}
+.nav-up {
+ top: -100px;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: #f9fafb;
+}
+.lime-sidebar-main {
+  background: #FFF;
+}
+.animate-message-buttons-container {
+  display: block;
+  margin-top: 2rem;
+}
+.animate-message-buttons-container td {
+  display: inline-block;
+  padding: 10px 20px;
+}
+.animate-message-action-button {
+  padding: 50px 25px;
+  border: none;
+  background: #FFF;
+  font-weight: 500;
+  font-size: 1.5rem;
+  transition: box-shadow 0.25s ease;
+}
+.animate-advice-card, .animate-message-action-button, .animate-booking-header {
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+  border-radius: 4px;
+}
+
+ /* separate one for the font stuff */
+.animate-message-action-button {
+  color: #092403;
+}
+
+.animate-message-buttons-container tbody {
+  display: grid;
+}
+
+.animate-message {
+  width: 90%;
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  padding: 3rem;
+  /* box-shadow: 0px 0px 20px; */
+  border-radius: 20px;
+}
+
+.animate-booking-header, .animate-booking-text, .animate-booking-advice, .animate-advice-book, .animate-advice-options {
+  /* max-width: 94%; */
+}
+
+.animate-message-text {
+  font-weight: 600;
+  font-size: 2.25vw;
+  color: #3E3E3E;
+}
+.action-header-text {
+  font-size: 1.5vw;
+}
+
+#form {
+  background: #f9fafb;
+}
+
+.animate-message-booking {
+  max-width: 75%;
+  margin-left: 12.5%;
+}
+.animate-advice-options {
+  padding: 0rem 2rem;
+}
+.animate-booking-image {
+  background-color: #D8D8D8;
+}
+.animate-booking-desc {
+  padding: 2rem;
+}
+.animate-booking-advice {
+  text-align: center;
+  padding: 20px;
+}
+
+.animate-advice-card {
+  /* background: #fff; */
+  /* padding: 30px; */
+  padding-left: 3rem;
+  margin: 0.625vw 1.25vw;
+  box-shadow: none;
+  background: none;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.no-margin {
+  margin: 0px;
+}
+.no-padding {
+  padding: 0px;
+}
+
+
+.animate-booking-desc {
+  font-size: 0.9rem;
+}
+.animate-outcome-more {
+  font-size: 0.75rem;
+  text-decoration: underline;
+}
+
+.lime-logo-sidebar {
+  text-align: center;
+}
+.lime-logo {
+  max-width: 100%;
+  width: 50%;
+}
+
+ /* -------------------- start checkboxes -------------------- */
+
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="checkbox"]:checked + label,
+[type="checkbox"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #212529;
+}
+[type="checkbox"]:checked + label:before,
+[type="checkbox"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #8dc63f;
+    background: #fff;
+    border-radius: 5px;
+}
+[type="checkbox"]:checked + label:after,
+[type="checkbox"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #8dc63f;
+    border-radius: 3px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+/* -------------------- end checkboxes -------------------- */
+
+
+#sidebar-text {
+  position: absolute;
+  /* height: 100%; */
+  top: 30%;
+  width: 100%;
+}
+
+
+
+
+
+.lime-section {
+	height: 11px;
+	width: 11px;
+	background-color: #8DC63F;
+  border-radius: 25px;
+  position: absolute;
+  left: 40%;
+  top: 6px;
+}
+.lime-divider {
+  height: 100%;
+  width: 1px;
+  left: 50%;
+}
+.lime-section.complete::after{
+
+}
+.lime-section-text {
+	color: #000000;
+	font-size: 1rem;
+	font-weight: 600;
+  color: #092403;
+	opacity: 0.5
+}
+
+.lime-section-text.active {
+  color: #000;
+  opacity: 1;
+}
+.lime-detail {
+  border-bottom: 1px solid #000;
+  font-size: 0.8rem;
+}
+
+.lime-help-btn {
+	height: 50px;
+	width: 75%;
+	border: 2px solid #8DC63F;
+	border-radius: 25px;
+  position: absolute;
+  left: 12.5%;
+  bottom: 25px;
+  background: none;
+  color: #8DC63F;
+}
+
+
+.lime-path-back {
+  border-bottom: 2px solid;
+}
+
+.lime-back-btn-container {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.25rem;
+  cursor: pointer;
+  margin-top: 3rem;
+}
+
+/* Booking Button */
+.animate-appointment-book-btn {
+ background-color: #8dc63f;
+ border-radius: 29px;
+ width: 300px;
+ color: #FFF;
+ display: inline-block;
+ font-weight: 600;
+ padding: 15px;
+}
+.animate-appointment-book-btn:hover {
+  cursor: pointer;
+}
+.animate-advice-book {
+ text-align: center;
+}
+
+.booking-recommendation {
+  max-width: 40%;
+  margin: 0 auto;
+}
+.recommendation-divider {
+  width: 85%;
+  height: 2px;
+  border-bottom: 2px solid #ededed;
+  margin: 0 auto;
+}
+
+
+
+.align-center {
+  text-align: center !important;
+}
+
+.send-rec-btn {
+  width: 25%;
+  text-align: center;
+}
+.animate-email-rec-input{
+  padding: 13px;
+  border: 2px solid #aaaaaa;
+  border-radius: 30px;
+  width: 70%;
+  margin-right: 4%;
+}
+
+
+.animate-message-inner {
+
+}
+
+.animate-message-text {
+  text-align: center;
+}
+
+.animate-message-buttons-container {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.animate-message-action-button {
+  width: 100%;
+}
+
+.lime-breadcrumb:hover {
+	cursor: pointer;
+}
+.lime-appointment{
+	max-width: 95%;
+}
+
+@media only screen and (max-width: 600px) {
+  .animate-message-td {
+  	width: 100% !important;
+  }
+  .lime-sidebar-main {
+  	display: none !important;
+  }
+  .animate-message {
+    width: 100%;
+    left: 0%;
+    padding: 0;
+    top: 5% !important;
+  }
+  .animate-message-text {
+  	font-size: 6.5vw;
+  }
+  .animate-message-buttons-container td {
+  	padding: 0px 20px;
+  }
+  .animate-message-action-button {
+  	padding: 25px 15px;
+  }
+  .animate-message-booking {
+  	max-width: 100%;
+    margin-left: 0%;
+  }
+  .booking-recommendation {
+  	max-width: 100%;
+  }
+
+}
+
+
+.overflow-auto {
+	overflow: auto;
+}
+
+
+
+.tabs-menu {
+  display: flex;
+  justify-content: center;
+}
+.w-tab-link {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  text-decoration: none;
+  padding: 9px 30px;
+  text-align: left;
+  cursor: pointer;
+  color: #222222;
+  background-color: #dddddd;
+}
+.tab_main {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-width: 140px;
+  margin-right: 15px;
+  padding-right: 35px;
+  padding-left: 35px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 1px solid #f2f5fa;
+  border-radius: 50px;
+  background-color: #fff;
+  font-family: 'Sf pro display', sans-serif;
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+.animate-message-action-button:hover, .tab_main:hover {
+  box-shadow: 0px 0px 10px #00000050;
+}
+.w--current {
+  background-color: #8dc63f;
+}
+.text-block-6 {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
