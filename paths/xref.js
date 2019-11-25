@@ -4,7 +4,7 @@ const pathObj = {
     message: "Hello, my name is",
     template_type: 'input',
     input: {
-      placeholder: "John",
+      placeholder: "Enter your name",
       path: "location"
     },
     data: {

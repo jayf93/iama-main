@@ -318,7 +318,7 @@ var generateResultDescription = (value, scope) => {
 let aF, aO, qO;
 $(window).ready(() => {
   $('body').prepend(`<div class="row no-margin">
-    <div class="col-lg-6 lime-sidebar-main">
+    <div class="col-lg-4 lime-sidebar-main">
       <span class="ml-2 d-none">Sidebar</span>
       <div class="lime-logo-sidebar mt-5">
       </div>
@@ -331,7 +331,7 @@ $(window).ready(() => {
         </button>
       </a>
     </div>
-    <div class="col-lg-6 overflow-auto">
+    <div class="col-lg-8 overflow-auto iama-main-side">
         <div id="iama" style="height:100vh;">
           <span></span>
         </div>
