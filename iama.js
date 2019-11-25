@@ -80,17 +80,15 @@ class AnimateForm {
     // $(this.container).html(m); // add it to the form
     $(this.container).hide().html(m).fadeIn();
     if (!props.previous) this.history.push(Object.assign(path, { path: data.path })); //if not a back action, push this to history
-    if (this.history && this.history.length > 1) { // this makes sure the back button isnt show on the About You options
-      $('.animate-message-inner').append(this.insertBackButton(path, data)); // add the back button
-      $('.lime-back-btn-container').click(e => this.handleBack(e)); // add listeners to the back button
-    }
+
+    this.history && this.history.length > 1 ? $('#iama-perm-back').fadeIn() : $('#iama-perm-back').fadeOut(); // if there is history then add the back button
 
     this.initListeners() // reinitialise the event listeners to be able to action clicks
     this.events.emit(data.path); // leave this at the end to ensure optimal ability to mutate events
   }
 
   insertBackButton(p, d){
-    return `<div class="lime-back-btn-container"><span class="lime-path-back">back</span></div>`; // returns the back button element
+    return `<div style="display:none;" class="iama-back-btn" id="iama-perm-back"><span>Back</span></div>`; // returns the back button element
   }
 
   handleBack(e){
@@ -123,7 +121,10 @@ class AnimateForm {
       this.pathObj = path;
       let initMsg = path[this.start][0] // intial path is loaded
       let a = new AnimateMessage(initMsg, this.start).render() // initial path is rendered
+      $(this.container).html(`<div id="iama-inner-a" class="iama-inner-a"></div><div id="iama-inner-b" class="iama-inner-b"><div id="iama-perm-progress">${this.insertBackButton()}</div></div>`); // insert the new containers
+      this.container = "#iama-inner-a"; // update the container
       $(this.container).hide().html(a).fadeIn(); // add it to the form
+      $('#iama-perm-back').click(e => this.handleBack(e)); // add listeners to the back button
       this.history.push(Object.assign(initMsg, { path: this.start }))
       this.initListeners() // initialise the event listeners to be able to action clicks
       this.initPixel();
@@ -202,17 +203,17 @@ class AnimateMessage {
     this.data = props.data ? Object.assign(props.data, { message: props.message }) : {}; // additional data to put into refs for callbacks
   }
   addButtons(buttons = [], data = {}){ // adds buttons to the message
-    let html = "<table class=\"animate-message-buttons-container\"><tbody><tr>" // initial html for the button container
+    let html = "<div class=\"animate-message-buttons-container\">" // initial html for the button container
     let width = buttons.length > 1 ? "50%" : "100%";
     buttons.forEach(button => { // iterate through the buttons array
       if (button.type === "web_url") { // action if the button should link to a URL instead of a path
-        html+= `<td class="animate-message-td" width=${width}><a href="${button.url}"><div><button class="button animate-message-action-button" data-currentPath="${this.currentPath}" data-text="${button.text}" data-path="${button.path}" ${this.returnDataParams(data)}>${button.text}</button></div></a></td>` // url button template
+        html+= `<div class="animate-message-td"><a href="${button.url}"><div><button class="button animate-message-action-button" data-currentPath="${this.currentPath}" data-text="${button.text}" data-path="${button.path}" ${this.returnDataParams(data)}>${button.text}<div class="animate-button-carat">></div></button></div></a></div>` // url button template
       } else {
-        html+= `<td class="animate-message-td" width=${width}><div><button class="button animate-message-action-button" data-currentPath="${this.currentPath}" data-text="${button.text}" data-path="${button.path}" ${this.returnDataParams(data)}>${button.text}</button></div></td>` // primary button template
+        html+= `<div class="animate-message-td"><button class="button animate-message-action-button" data-currentPath="${this.currentPath}" data-text="${button.text}" data-path="${button.path}" ${this.returnDataParams(data)}>${button.text}<div class="animate-button-carat">></div></button></div>` // primary button template
       }
 
     })
-    html+= "</tr></tbody></table>" // end html to the buton container
+    html+= "</div>" // end html to the buton container
     return html // pass the button html back
   }
   addInput(input = {}, data = {}) {

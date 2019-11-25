@@ -318,8 +318,7 @@ var generateResultDescription = (value, scope) => {
 let aF, aO, qO;
 $(window).ready(() => {
   $('body').prepend(`<div class="row no-margin">
-    <div class="col-sm-2 lime-sidebar-main">
-      <span class="ml-2 d-none">Sidebar</span>
+    <div class="col-lg-6 lime-sidebar-main">
       <div class="lime-logo-sidebar mt-5">
         <a href="./index.html">
           <img class="lime-logo" src="https://uploads-ssl.webflow.com/5cedec8822e95a9e59950411/5d08c51f95e837a09380dc4b_lime_logo.svg">
@@ -334,8 +333,7 @@ $(window).ready(() => {
         </button>
       </a>
     </div>
-    <div class="col-sm-10 overflow-auto">
-      <span class="d-none">Convo Form</span>
+    <div class="col-lg-6 overflow-auto">
         <div id="iama" style="height:100vh;">
           <span></span>
         </div>
