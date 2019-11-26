@@ -30,6 +30,7 @@ class AnimateForm {
     this.flowId = props.flow; // flow that corresponds to the project
     this.user = this.getUser(); // retrieves or creates a user for this device
     this.pixelF; // unassigned pixel frame
+    this.stepPercentage = props.stepPercentage || 10;
     this.init(); // initialises the function
   }
 
@@ -79,11 +80,20 @@ class AnimateForm {
     let m = new AnimateMessage(Object.assign(path, { previous: data.path }), data.path).render(); // render the path
     // $(this.container).html(m); // add it to the form
     $(this.container).hide().html(m).fadeIn();
-    if (!props.previous) this.history.push(Object.assign(path, { path: data.path })); //if not a back action, push this to history
+    if (!props.previous) {
+      this.history.push(Object.assign(path, { path: data.path })); //if not a back action, push this to history
+      $('.iama-perm-progress-bar').animate({
+        width: $('.iama-perm-progress-bar').width((i, val) => val+= $('.iama-perm-progress-bar').width() >= $('.iama-perm-progress').width() ? 0 : ($('.iama-perm-progress').width() * (this.stepPercentage / 100)))
+      })
+    } else {
+      $('.iama-perm-progress-bar').animate({
+        width: $('.iama-perm-progress-bar').width((i, val) => val-= $('.iama-perm-progress-bar').width() <= 0 ? 0 : ($('.iama-perm-progress').width() * (this.stepPercentage / 100)))
+      })
+    }
 
     this.history && this.history.length > 1 ? $('#iama-perm-back').fadeIn() : $('#iama-perm-back').fadeOut(); // if there is history then add the back button
 
-    this.initListeners() // reinitialise the event listeners to be able to action clicks
+    this.initListeners(); // reinitialise the event listeners to be able to action clicks
     this.events.emit(data.path); // leave this at the end to ensure optimal ability to mutate events
   }
 
@@ -121,7 +131,7 @@ class AnimateForm {
       this.pathObj = path;
       let initMsg = path[this.start][0] // intial path is loaded
       let a = new AnimateMessage(initMsg, this.start).render() // initial path is rendered
-      $(this.container).html(`<div id="iama-inner-a" class="iama-inner-a"></div><div id="iama-inner-b" class="iama-inner-b"><div id="iama-perm-progress">${this.insertBackButton()}</div></div>`); // insert the new containers
+      $(this.container).html(`<div id="iama-inner-a" class="iama-inner-a"></div><div id="iama-inner-b" class="iama-inner-b"><div id="iama-perm-progress" class="iama-perm-progress"><div class="iama-perm-progress-bar"></div></div>${this.insertBackButton()}</div>`); // insert the new containers
       this.container = "#iama-inner-a"; // update the container
       $(this.container).hide().html(a).fadeIn(); // add it to the form
       $('#iama-perm-back').click(e => this.handleBack(e)); // add listeners to the back button

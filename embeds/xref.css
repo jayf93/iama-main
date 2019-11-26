@@ -18,3 +18,36 @@ body {
 .animate-message-action-checkbox.checked .animate-button-carat {
   color: #94D500;
 }
+
+#iama-sidebar-text-na {
+  font-size: 2.5rem;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.xref-green {
+  color: #94D500;
+}
+.xref-hero-txt, .xref-testimonial-container {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.xref-testimonial-txt {
+  font-size: 0.75rem;
+}
+
+.iama-perm-progress {
+  width: 100%;
+  background: rgba(148, 213, 0, 0.25);
+  min-height: 10px;
+  border-radius: 5px;
+}
+.iama-perm-progress-bar {
+  background: #94D500;
+  width: 0%;
+  height: 10px;
+  border-radius: 5px;
+}

@@ -329,13 +329,15 @@ $(window).ready(() => {
         </svg>
       </div>
       <div class="container" id="iama-sidebar-text-na" style="top:20%;">
-
+        <div class="xref-hero-txt">
+          <span>A few details about your <span class="xref-green">business</span></span>
+        </div>
       </div>
-      <a href="/contact-us" target="_blank">
-        <button class="lime-help-btn">
-          <span>Contact us</span>
-        </button>
-      </a>
+      <div class="xref-testimonial-container">
+        <span class="xref-testimonial-txt">
+        "Using Xref frees up time for <span class="xref-green">more strategic talent</span> acquisition tasks, and enables Qantas to reduce the possibility of reference fraud..."
+        </span>
+      </div>
     </div>
     <div class="col-lg-8 overflow-auto iama-main-side">
         <div id="iama" style="height:100vh;">
@@ -361,6 +363,7 @@ $(window).ready(() => {
     pathObj,
     project: "jay",
     flow: "test",
+    stepPercentage: 20,
     history: validateHistory(params) // augments the beginning history to start it with some history
   })
   if (params.has('p')) {
@@ -401,6 +404,23 @@ var setEvents = () => {
       }
       aF.manageRoutes(e);
     })
+  })
+
+
+  aF.events.on('location', e => {
+    $('.xref-hero-txt').html('<span>A few details about your <span class="xref-green">business</span></span>')
+  })
+
+  aF.events.on('hire_count', e => {
+    $('.xref-hero-txt').html('<span>Let\'s get to know more about your <span class="xref-green">hiring</span></span>')
+  })
+  aF.events.on('hiring_most_important', e => {
+    $('.xref-hero-txt').html('<span>Let\'s get to know more about your <span class="xref-green">hiring</span></span>')
+  })
+
+  aF.events.on('recommendation', e => {
+    $('.xref-hero-txt').html('<span><span class="xref-green">Xref</span> can help.</span>')
+    $('.iama-perm-progress-bar').width('100%');
   })
 
 }
