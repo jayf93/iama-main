@@ -321,8 +321,14 @@ $(window).ready(() => {
     <div class="col-lg-4 lime-sidebar-main">
       <span class="ml-2 d-none">Sidebar</span>
       <div class="lime-logo-sidebar mt-5">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3415 714">
+          <path d="M3415 80.5v-79h-486v711h79.5v-316h373v-79h-373v-237H3415zM2532 80.5v-79h-486v711h486v-79h-407v-237h373v-79h-373v-237h407zM1599.5 712.5H1702l-260.5-316h10.5c109 0 197.5-88.5 197.5-197.5S1561 1.5 1452 1.5h-328.5v711h79v-316h136zm-397-632H1452a118.5 118.5 0 0 1 0 237h-249.5z"></path>
+          <g fill="#95d600">
+            <path d="M0 56L66 1.5 359.5 357 66 712.5l-66-55L248.5 357 0 56zM726 56L660.5 1.5 366.5 357l294 355.5 65.5-55L477.5 357 726 56z"></path>
+          </g>
+        </svg>
       </div>
-      <div class="container" id="iama-sidebar-text" style="top:20%;">
+      <div class="container" id="iama-sidebar-text-na" style="top:20%;">
 
       </div>
       <a href="/contact-us" target="_blank">

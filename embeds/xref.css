@@ -4,3 +4,17 @@ body {
 .iama-main-side {
   background: #FFF;
 }
+.lime-logo-sidebar svg {
+  max-width: 125px;
+}
+.lime-logo-sidebar {
+  margin-top: 1.5rem!important;
+  margin-left: 2rem;
+  text-align: inherit;
+}
+.animate-message-action-checkbox.checked {
+  border: 1px solid #94D500;
+}
+.animate-message-action-checkbox.checked .animate-button-carat {
+  color: #94D500;
+}

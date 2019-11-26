@@ -65,14 +65,44 @@ const pathObj = {
     template_type: 'select',
     options: [
       {
-        text: "ATS 1",
-        value: "ATS 1",
+        text: "SmartRecruiters",
+        value: "SmartRecruiters",
         path: "hiring_most_important"
       },{
-        text: "ATS 2",
+        text: "JobAdder",
         path: "hiring_most_important"
       },{
-        text: "ATS 3",
+        text: "Oracle Taleo",
+        path: "hiring_most_important"
+      },{
+        text: "Bullhorn",
+        path: "hiring_most_important"
+      },{
+        text: "Workday",
+        path: "hiring_most_important"
+      },{
+        text: "Kallidus Recruit",
+        path: "hiring_most_important"
+      },{
+        text: "Oracle Recruitment Cloud (ORC)",
+        path: "hiring_most_important"
+      },{
+        text: "iCIMS",
+        path: "hiring_most_important"
+      },{
+        text: "SnapHire",
+        path: "hiring_most_important"
+      },{
+        text: "Lever",
+        path: "hiring_most_important"
+      },{
+        text: "Springboard",
+        path: "hiring_most_important"
+      },{
+        text: "Expr3ss!",
+        path: "hiring_most_important"
+      },{
+        text: "Avature",
         path: "hiring_most_important"
       },{
         text: "Other",
@@ -86,8 +116,8 @@ const pathObj = {
   }],
   hiring_most_important: [{
     message: "When hiring, the things most important to me are",
-    template_type: "button",
-    buttons: [{
+    template_type: "checkbox",
+    options: [{
       text: 'Core Feature 1',
       path: "recommendation"
     },{
@@ -99,7 +129,27 @@ const pathObj = {
     }],
     data: {
       stage: "hiring_most_important",
-      id: "hiring_most_important"
+      id: "hiring_most_important",
+      path: 'recommendation'
+    }
+  }],
+  recommendation: [{
+    message: 'xref recommends...',
+    buttons: []
+  }],
+  test: [{
+    message: 'testing checkboxes',
+    template_type: 'checkbox',
+    options: [
+      {
+        text: 'A',
+        value: 'Aa'
+      },{
+        text: 'B'
+      }
+    ],
+    data: {
+      path: 'name'
     }
   }]
 }

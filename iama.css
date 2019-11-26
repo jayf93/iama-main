@@ -20,7 +20,7 @@ top: 0px;
   display: grid;
 }
 .iama-inner-a {
-  min-height: 85vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,7 +45,7 @@ body {
   display: inline-block;
   padding: 10px 20px;
 }
-.animate-message-action-button {
+.animate-message-action-button, .animate-message-action-checkbox {
   padding: 1rem;
   padding-left: 2rem;
   border: 1px solid rgba(0,0,0,0.5);
@@ -56,9 +56,17 @@ body {
   text-align: left;
   position: relative;
 }
-.animate-advice-card, .animate-message-action-button, .animate-booking-header {
+.animate-advice-card, .animate-message-action-button, .animate-booking-header, .animate-message-action-checkbox {
   /* box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1); */
   border-radius: 15px;
+}
+
+.animate-message-action-button:focus, .animate-message-action-input:focus, .animate-message-action-checkbox:focus {
+  outline: none;
+}
+
+.animate-message-action-checkbox.checked {
+  border: 1px solid rgba(0,0,0,0.25);
 }
 
 .animate-message-action-input {
@@ -89,12 +97,12 @@ body {
   margin-right: 1rem;
 }
 
-.animate-message-buttons-container, .animate-message-input-container, .animate-message-select-container {
+.animate-message-buttons-container, .animate-message-input-container, .animate-message-select-container, .animate-message-checkbox-container {
   margin-top: 2rem;
 }
 
  /* separate one for the font stuff */
-.animate-message-action-button {
+.animate-message-action-button, .animate-message-action-checkbox {
   color: #092403;
 }
 
@@ -120,6 +128,25 @@ body {
 }
 .action-header-text {
   font-size: 1.5vw;
+}
+
+.caret {
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+}
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.iama-checkbox-unchecked {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 5px;
+  border: 2px solid;
+  margin-top: 20%;
 }
 
 #form {
@@ -367,7 +394,7 @@ body {
   table-layout: fixed;
 }
 
-.animate-message-action-button {
+.animate-message-action-button, .animate-message-action-checkbox {
   width: 100%;
 }
 
@@ -397,7 +424,7 @@ body {
   .animate-message-buttons-container td {
   	padding: 0px 20px;
   }
-  .animate-message-action-button {
+  .animate-message-action-button, .animate-message-action-checkbox {
   	padding: 25px 15px;
   }
   .animate-message-booking {
@@ -455,7 +482,7 @@ body {
   font-family: 'Sf pro display', sans-serif;
   transition: box-shadow 0.25s ease, background-color 0.25s ease;
 }
-.animate-message-action-button:hover, .tab_main:hover {
+.animate-message-action-button:hover, .tab_main:hover, .animate-message-action-checkbox:hover {
   border: 1px solid rgba(0,0,0,0.25);
 }
 .w--current {

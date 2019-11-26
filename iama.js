@@ -143,7 +143,8 @@ class AnimateForm {
       return this.history[this.history.length-1]
   }
   initListeners(){ // intiialises the listeners for the clicks
-    if ($('.animate-message-action-button')) $('.animate-message-action-button').off().click(e => this.manageRoutes(e)) // reset the on-click listeners
+    if ($('.animate-message-action-button')) $('.animate-message-action-button').off().click(e => this.manageRoutes(e)); // reset the on-click listeners
+    if ($('.animate-message-action-checkbox')) $('.animate-message-action-checkbox, .animate-button-carat').off().click(e => this.manageChecks(e));
     if ($('.animate-message-action-input')) {
       $('.animate-message-action-input').off().on('keypress', e => e.which === 13 ? this.manageRoutes(e) : null)
       $('.animate-message-action-input').focus();
@@ -171,6 +172,19 @@ class AnimateForm {
     this.switchPath(data); // switch the path for the next message;
     this.triggerCallback(data); // fire the callback to the user;
     this.dataObj[data.stage] = data.value;
+  }
+  manageChecks(e){
+    let $el = !$(e.target).hasClass('animate-message-action-checkbox') ? $(e.target).parents('.animate-message-action-checkbox') : $(e.target);
+
+    let checkedIcon = `<span>&#10003;</span>`;
+    let uncheckedIcon = `<div class="iama-checkbox-unchecked"></div>`;
+
+
+    $el.toggleClass('unchecked').toggleClass('checked');
+
+    $el.find('.animate-button-carat').html($el.hasClass('checked') ? checkedIcon : uncheckedIcon)
+
+    $el.data('checked', $el.hasClass('checked'));
   }
   updateSidebar(data){
     $(`
@@ -207,9 +221,9 @@ class AnimateMessage {
     let width = buttons.length > 1 ? "50%" : "100%";
     buttons.forEach(button => { // iterate through the buttons array
       if (button.type === "web_url") { // action if the button should link to a URL instead of a path
-        html+= `<div class="animate-message-td"><a href="${button.url}"><div><button class="button animate-message-action-button" data-currentPath="${this.currentPath}" data-text="${button.text}" data-path="${button.path}" ${this.returnDataParams(data)}>${button.text}<div class="animate-button-carat">></div></button></div></a></div>` // url button template
+        html+= `<div class="animate-message-td"><a href="${button.url}"><div><button class="button animate-message-action-button" data-currentPath="${this.currentPath}" data-text="${button.text}" data-path="${button.path}" ${this.returnDataParams(data)}>${button.text}<div class="animate-button-carat"><i class="caret right"></i></div></button></div></a></div>` // url button template
       } else {
-        html+= `<div class="animate-message-td"><button class="button animate-message-action-button" data-currentPath="${this.currentPath}" data-text="${button.text}" data-path="${button.path}" ${this.returnDataParams(data)}>${button.text}<div class="animate-button-carat">></div></button></div>` // primary button template
+        html+= `<div class="animate-message-td"><button class="button animate-message-action-button" data-currentPath="${this.currentPath}" data-text="${button.text}" data-path="${button.path}" ${this.returnDataParams(data)}>${button.text}<div class="animate-button-carat"><i class="caret right"></i></div></button></div>` // primary button template
       }
 
     })
@@ -254,16 +268,36 @@ class AnimateMessage {
 
     return html;
   }
+  addCheckBox(options = [], data = []){
+    let htmlChecks = "";
+
+    let addCheck = (option, n) => {
+      return htmlChecks+= `<div class="animate-message-td"><button class="button animate-message-action-checkbox iama-checkbox unchecked" data-state="unchecked" data-currentPath="${this.currentPath}" data-text="${option.text}" data-path="${option.path}" ${this.returnDataParams(data)}>${option.text}<div class="animate-button-carat"><div class="iama-checkbox-unchecked"></div></div></button></div>`
+    }
+
+    let addCheckContinue = () => {
+      return `<div class="iama-checkbox-action"><button class="button animate-message-action-button" data-state="unchecked" data-currentPath="${this.currentPath}" data-text="Continue" data-path="${data.path}" ${this.returnDataParams(data)}>Continue<div class="animate-button-carat"><i class="caret right"></i></div></button></div>`
+    }
+
+    options.forEach((option, n) => addCheck(option,n));
+
+    let html = `<div class="animate-message-checkbox-container"><div class="iama-checkbox-container">${htmlChecks}</div>${addCheckContinue()}</div>`;
+
+    return html;
+  }
   addTemplate(){
     switch(this.template_type){
       case 'input':
         return this.addInput(this.props.input, this.data);
       break;
       case 'select':
-        return this.addSelect(this.props.options, this.data)
+        return this.addSelect(this.props.options, this.data);
       break;
       case 'multi-button':
-        return this.addMultiButton(this.props.options, this.data)
+        return this.addMultiButton(this.props.options, this.data);
+      break;
+      case 'checkbox':
+        return this.addCheckBox(this.props.options, this.data);
       break;
       default:
         return this.addButtons(this.buttons, this.data);
