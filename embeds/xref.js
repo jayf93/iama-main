@@ -1,39 +1,5 @@
-var generateOptDescription = type => {
-  switch(type){
-    case 'IME with an Occupational Physician':
-
-    break;
-    case 'IME with another Specialist':
-
-    break;
-    case 'FFD with an Occupational Physician':
-
-    break;
-    case 'FFD with another Specialist':
-
-    break;
-    default:
-
-    break;
-  }
-}
-
-
-var generateOptQuestions = questions => {
-
-  qO = questions || [];
-  let html = "";
-  if (!qO.length) {
-    return html
-  } else {
-    qO.forEach(question => html+= `<div class="animate-booking-outcome-desc mb-1"><span>${question}</span></div>`)
-  }
-  return html
-
-}
-
 // actions for when the window is ready
-let aF, aO, qO;
+let iama, aO, qO;
 $(window).ready(() => {
   $('body').prepend(`<div class="row no-margin">
     <div class="col-lg-4 lime-sidebar-main">
@@ -72,10 +38,10 @@ $(window).ready(() => {
       isMobile = true;
   }
   // console.log('initing booking form', pathObj)
-  aF = $('#iama').animateForm({ // initialise the animatedform
+  iama = $('#iama').iama({ // initialise the animatedform
     form: 'form',
     start: start,
-    triggerCallback: e => parseCallbacks(e),
+    // triggerCallback: e => parseCallbacks(e),
     triggerEnd: e => parseEnd(e),
     // triggerPath: (p, d, props) => parsePath(p, d, props),
     pathObj,
@@ -87,24 +53,22 @@ $(window).ready(() => {
   if (params.has('p')) {
     let type = params.get('t'),
         s = params.get('s');
-    aF.dataObj['scope'] = type;
+    iama.dataObj['scope'] = type;
     // $('.animate-message-inner').append(insertBackButton()); // add the back button
     // $('.lime-back-btn-container').click(e => handleBack(e)); // add listeners to the back button
   }
 
-  setEvents()
+  setEvents(); // sets the eventemitter events
 })
 
 var setEvents = () => {
 
-  aF.events.on('loc', e => {
+  iama.events.on('loc', e => {
     console.log('loc step is here')
     $('.animate-message-action-button').off().click(e => {
-      console.log('this was just clicked')
-      console.log($(e.target).data())
       let location = $(e.target).data('text'),
-          scope = aF.dataObj.scope;
-      aF.dataObj.location = location;
+          scope = iama.dataObj.scope;
+      iama.dataObj.location = location;
       switch(scope) {
         case 'Employer':
             $(e.target).data('path', 'employer_a')
@@ -119,23 +83,23 @@ var setEvents = () => {
           $(e.target).data('path', 'worker')
           break;
       }
-      aF.manageRoutes(e);
+      iama.manageRoutes(e);
     })
   })
 
 
-  aF.events.on('location', e => {
+  iama.events.on('location', e => {
     $('.xref-hero-txt').html('<span>A few details about your <span class="xref-green">business</span></span>')
   })
 
-  aF.events.on('hire_count', e => {
+  iama.events.on('hire_count', e => {
     $('.xref-hero-txt').html('<span>Let\'s get to know more about your <span class="xref-green">hiring</span></span>')
   })
-  aF.events.on('hiring_most_important', e => {
+  iama.events.on('hiring_most_important', e => {
     $('.xref-hero-txt').html('<span>Let\'s get to know more about your <span class="xref-green">hiring</span></span>')
   })
 
-  aF.events.on('recommendation', e => {
+  iama.events.on('recommendation', e => {
     $('.xref-hero-txt').html('<span><span class="xref-green">Xref</span> can help.</span>')
     $('.iama-perm-progress-bar').width('100%');
   })
@@ -178,408 +142,8 @@ var validateHistory = params => {
   }
 }
 
-// function to parse the callback response when a button is clicked
-// will be used to manipulate the sidebar
-var parseCallbacks = e => {
-  console.log(e)
-  let html = "";
-  switch(e.stage) {
-    case 'restart':
-      $('#sidebar-text').html('')
-    break;
-    case 'scope':
-      resetSidebarActions()
-      html = `<span class="lime-detail lime-detail-scope"><b>- ${e.value}</b></span>`
-      $('.lime-about').append(html)
-      $('[data-step="1-b"]').find('.lime-section-text').hasClass('active') ? null : $('[data-step="1-b"]').find('.lime-section-text').addClass('active');
-      $('[data-step="1-b"]').find('.lime-section.lime-ball').hasClass('d-none') ? $('[data-step="1-b"]').find('.lime-section.lime-ball').removeClass('d-none') : null;
-      $('[data-step="1"]').find('.lime-divider').toggleClass('d-none')
-      dataObj.scope = e.value;
-      if (e.value === "an Employer") $('#sidebar-text').append(`<div class="row lime-sidebar-scope"><span>My <b>Worker</b></span></div>`)
-      if (e.value === "a Lawyer") $('#sidebar-text').append(`<div class="row lime-sidebar-scope"><span>My <b>Client</b></span></div>`)
-      $('[data-step="1-b"]').find('.lime-breadcrumb').attr('onclick', 'prepareSwitchRoute("loc")')
-
-    break;
-    case 'location':
-      $('.lime-detail-problem, .lime-detail-loc').remove()
-      html = `<span class="lime-detail lime-detail-loc"><b>- ${e.value}</b></span>`
-      $('.lime-location').append(html)
-      $('[data-step="2"]').find('.lime-section-text').hasClass('active') ? null : $('[data-step="2"]').find('.lime-section-text').addClass('active');
-      $('[data-step="2"]').find('.lime-section.lime-ball').hasClass('d-none') ? $('[data-step="2"]').find('.lime-section.lime-ball').removeClass('d-none') : null;
-
-      switch(aF.dataObj.scope) {
-        case 'Employer':
-          $('[data-step="2"]').find('.lime-breadcrumb').attr('onclick', 'prepareSwitchRoute("employer_a")')
-        break;
-        case 'Lawyer':
-          $('[data-step="2"]').find('.lime-breadcrumb').attr('onclick', 'prepareSwitchRoute("lawyer")')
-        break;
-        case 'Insurer':
-          $('[data-step="2"]').find('.lime-breadcrumb').attr('onclick', 'prepareSwitchRoute("insurer")')
-        break;
-        case 'Worker':
-          $('[data-step="2"]').find('.lime-breadcrumb').attr('onclick', 'prepareSwitchRoute("worker")')
-        break;
-      }
-
-      dataObj.problem = e.value;
-    break;
-    case 'problem':
-      $('.lime-detail-problem, .lime-detail-wr').remove()
-      html = `<span class="lime-detail lime-detail-problem"><b>- ${e.value}</b></span>`
-      $('.lime-condition').append(html)
-
-      dataObj.problem = e.value;
-    break;
-    case 'wr':
-      $('.lime-detail-wr').remove()
-      html = `<br class="lime-detail-wr"><span class="lime-detail lime-detail-wr"><b>- ${e.value}</b></span>`
-      $('.lime-condition').append(html)
-      dataObj.problem = e.value;
-      $('[data-step="3"]').find('.lime-section-text').hasClass('active') ? null : $('[data-step="3"]').find('.lime-section-text').toggleClass('active');
-      $('[data-step="3"]').find('.lime-section').hasClass('d-none') ? $('[data-step="3"]').find('.lime-section').removeClass('d-none') : null;
-      $('[data-step="2"]').find('.lime-divider').toggleClass('d-none')
-    break;
-    case 'IME':
-      $('.lime-detail-IME').remove()
-      html = `<span class="lime-detail lime-detail-IME"><b>- ${e.value}</b></span>`;
-      $('.lime-appointment').append(html)
-      console.log(e, e.currentPath, e.currentpath)
-      if (aF.dataObj['scope'] === 'Worker' || aF.dataObj['scope'] === 'Insurer') $('[data-step="3"]').find('.lime-breadcrumb').attr('onclick', `prepareSwitchRoute("${e.currentPath || e.currentpath}")`);
-    break;
-    case 'diagnosis':
-      $('[data-step="3"]').find('.lime-breadcrumb').attr('onclick', `prepareSwitchRoute("${e.currentPath || e.currentpath}")`)
-    break;
-    case 'short-problem': // short-problem is used for lawyer/insurer flows
-      $('.lime-detail-problem').remove()
-      html = `<span class="lime-detail lime-detail-problem"><b>- ${e.value}</b></span>`
-      $('.lime-condition').append(html)
-      $('[data-step="3"]').find('.lime-section-text').hasClass('active') ? null : $('[data-step="3"]').find('.lime-section-text').addClass('active');
-      $('[data-step="3"]').find('.lime-section').hasClass('d-none') ? $('[data-step="3"]').find('.lime-section').removeClass('d-none') : null;
-      $('[data-step="2"]').find('.lime-divider').toggleClass('d-none');
-    break;
-    default:
-      // do nothing
-    break;
-
-  }
-}
-
 var parseEnd = e => { // triggered at the end of the flow
   setTimeout(function(){ // slight delay to ensure that the dataObject is correctly populated
-    createResult(e.IME, e.scope) // will be used to mutate the end options for the user
+    console.log('this is the end')
   }, 50)
-
-}
-
-var prepareSwitchRoute = path => {
-  aF.switchPath({ path })
-}
-
-var createResult = (value, scope) => { // will create the booking card at the end
-  let html = `<div class="animate-message-booking">
-                <div class="animate-message-text action-header-text mb-4"><span>You need a...</span></div>
-                <div class="animate-booking-type">
-                  <div class="row animate-booking-header" style="background: #FFF;">
-                    <div class="col-sm-12 animate-booking-desc">${generateResultDescription(value, scope)}
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-12 animate-booking-advice mt-4"><span><b>Please tick the areas that you need advice on <i>(optional)</i>:</b></span></div>
-                  </div>
-                  <div class="row animate-advice-options">
-                    ${generateOptCheckboxes(value, scope)}
-                  </div>
-                  <div class="animate-advice-book">
-                    <div class="animate-appointment-book-btn" onclick="createRecommendations('${value}')">
-                      Book Appointment
-                    </div>
-                  </div>
-                </div>
-              </div>`
-  $('.animate-message').css('top', '10%');
-  $('.animate-message-inner').replaceWith(html);
-
-}
-
-var createRecommendations = value => { // will create the booking card at the end
-  aO = [];
-  questions = [];
-  if (!$('.advice-options-check:checked').length) return redirectToBooking();
-  $('.advice-options-check:checked').each((i, c) => {
-    aO.push($(c).data('verbose'))
-    questions.push($(c).data('question'))
-  })
-  console.log(questions, "Qs HERE")
-  console.log('creating recommendations here')
-  let html = `<div class="animate-message-booking booking-recommendation mb-4">
-                <div class="animate-message-text mb-4"><span>Before you book...</span></div>
-                <div class="animate-booking-type">
-                  <div class="row animate-booking-header mb-4" style="background: #FFF;">
-                    <div class="col-sm-12 animate-booking-desc">
-                      <div class="animate-booking-outcome mb-2"><span><b>We recommend you book a...</b></span></div>
-                      <div class="animate-booking-outcome-desc mb-1"><span>${value}</span></div>
-                      <div class="animate-outcome-more mb-4">${generateReadMoreLink(value)}</div>
-                      <div class="animate-booking-outcome animate-booking-questions-container mb-2"><span><b>Please ensure that your referral includes questions such as:</b></span></div>
-                      ${generateOptQuestions(questions)}
-                    </div>
-                    <div class="recommendation-divider"></div>
-                    <div class="col-sm-12 animate-booking-desc animate-booking-emailer-container">
-                      <div class="animate-booking-outcome mb-4 align-center"><span><b>Want this emailed to you? Enter your email address below...</b></span></div>
-                      <input class="animate-email-rec-input" type="text" id="recommendation-email-address" placeholder="Enter email address">
-                      <div class="animate-appointment-book-btn send-rec-btn" id="animate-rec-send-btn" onclick="sendRecommendations('${value}')">Send</div>
-                    </div>
-                  </div>
-
-                  <div class="animate-advice-book">
-                    <div class="animate-appointment-book-btn" onclick="redirectToBooking()">
-                      Book Appointment
-                    </div>
-                  </div>
-                </div>
-              </div>`
-  $('.animate-message').css('top', '5%');
-  $('.animate-message-booking').replaceWith(html);
-  if (!qO.length) $('.animate-booking-questions-container, .animate-booking-emailer-container, .recommendation-divider').remove();
-  $('#recommendation-email-address').on('keypress', e => {
-    if (e.which === 13) {
-      sendRecommendations(value)
-    }
-  })
-}
-
-var generateReadMoreLink = type => {
-  if (type.includes('IME')) {
-    return '<a href="/lime-services/independent-medical-examination" target="_blank"><span><b>Read more about Independent Medical Examinations</b></span></a>'
-  } else if (type.includes('FFD')) {
-    return '<a href="/lime-services/fitness-for-duty" target="_blank"><span><b>Read more about Fitness for Duty Assessments</b></span></a>'
-  } else if (type.includes('File Review')) {
-    //TODO  add this in
-  } else {
-    return '<a href="/lime-services/" target="_blank"><span><b>Read more about our services</b></span></a>'
-  }
-}
-
-var redirectToBooking = () => {
-  let { location, IME } = aF.dataObj,
-      appId, locId;
-
-  if (IME.includes('IME')) {
-    appId = "10587773";
-  } else if (IME.includes('FFD')) {
-    appId = "10532614";
-  } else if (IME.includes('File Review')) {
-    appId = ""
-  } else {
-    return window.location.href = "https://app.acuityscheduling.com/schedule.php?owner=17864444";
-  }
-
-  return window.location.href = `https://app.acuityscheduling.com/schedule.php?owner=17864444?location=${location}&appointmentType=${appId}`;
-}
-
-var sendRecommendations = type => {
-  let to = $('#recommendation-email-address').val()
-  let data = {
-    apptype: type,
-    question: qO,
-    advice: aO
-  }
-  let msg = {
-    to,
-    from: 'jay.farrell@live.com.au',
-    templateId: 'd-c081a5569a674022bf19f3d6158ce47f',
-    dynamic_template_data: data
-  }
-
-  var req = new Request('/help-me-book?email=' + to, {
-      method: 'get',
-      mode: 'cors',
-      headers: {
-        "Content-type": "application/x-www-form-urlencoded",
-        "x-api-key": "ECRtMEGAWNa8v5aqbvkHJG2QDvyUcBH3kdlxj4Ne"
-      },
-      // body: data
-    });
-  // Use request as first parameter to fetch method
-//   fetch(req)
-//       .then(r => console.log('r here', r))
-//       .catch(e => console.log(e))
-
-//    var form = document.getElementById("email-form-2");
-//    var element1 = document.getElementById("email-2")
-//    element1.value = "un";
-//    // form.submit();
-//    console.log('submitting form')
-
-
-//     var http = new XMLHttpRequest();
-//     http.open("POST", "/help-me-book", true);
-//     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-//     var params = "email=" + to; // probably use document.getElementById(...).value
-//     http.send(params);
-//     http.onload = function() {
-//         console.log(http)
-//         alert(http.responseText);
-//     }
-
-  // console.log('about to make this form ajax')
-  // makeWebflowFormAjax($('form'), success => {
-  //   console.log(success, "SUCCESS")
-  // }, err => console.log(err))
-  // console.log($('#email-form-2'))
-  // $('#email-2').val(to)
-  // setTimeout(function(){
-  //   // $('#email-form-2').submit()
-  //   $('#form-submit-btn').click()
-  // }, 500)
-
-  $('#email-form-2').submit(e => {
-    console.log('this is about to me submitted')
-    e.preventDefault();
-    let form = $(e.target);
-    $.ajax({
-     method: "POST",
-     url: form.attr('action'),
-     data: form.serialize(),
-
-      success: function(data){
-        $('#animate-appointment-book-btn').text('Thankyou')
-        console.log(data)
-        if(data.success){
-          //successful submission - hide the form and show the success message
-          parent = $(form.parent());
-          parent.children('form').css('display','none');
-          parent.children('.w-form-done').css('display','block');
-        } else {
-          //failed submission - log the output to the console and show the failure message
-          console.log('this failed', data)
-          }
-      },
-      error: function(e){
-        console.log(e)
-        console.log('about to disable btn')
-        $('#animate-rec-send-btn').text('Thankyou').attr('disabled', true)
-      	}
-    });
-  })
-  $('#email-2').val(to);
-  data = data || []
-  $('#opts').val(JSON.stringify(data))
-  $('#email-form-2').submit();
-
-}
-
-
-var makeWebflowFormAjax = function( forms, successCallback, errorCallback ) {
-	forms.each(function(){
-		var form = $(this);
-		form.on("submit", function(){
-			var container = 	form.parent();
-			var doneBlock  =	$(".w-form-done", container);
-			var failBlock  =	$(".w-form-fail", container);
-
-			var action = 		form.attr("action");
-			var method = 		form.attr("method");
-			var data = 			form.serialize();
-
-			// call via ajax
-			$.ajax({
-				type: method,
-				url: action,
-				data: data,
-				success: function (resultData) {
-					if (typeof successCallback === 'function') {
-						// call custom callback
-						result = successCallback(resultData);
-						if ( ! result ) {
-							// show error (fail) block
-							form.show();
-							doneBlock.hide();
-							failBlock.show();
-							// console.log(e);
-              console.log('this error\'d out')
-
-							return;
-						}
-					}
-
-					// show success (done) block
-					form.hide();
-					doneBlock.show();
-					failBlock.hide();
-				},
-
-				error: function (e) {
-					// call custom callback
-					if (typeof errorCallback === 'function') {
-            console.log(e)
-						errorCallback(e)
-					}
-
-					// show error (fail) block
-					form.show();
-					doneBlock.hide();
-					failBlock.show();
-					console.log(e);
-				}
-			});
-
-			// prevent default webdlow action
-			return false;
-		});
-	});
-}
-
-// template to return the back button for the form
-var insertBackButton = (p, d) => {
-  return `<div class="lime-back-btn-container"><span class="lime-path-back">back</span></div>`
-}
-
-// handles the sidebar step backwards when the back button is clicked
-var handleSidebarReverse = p => {
-  if (!p.data && p.data.stage) return false; // return false if there is no stage assigned to this step
-    console.log(p.data.stage)
-  // switch identifies which elements to remove and adjust
-  switch (p.data.stage){
-    case 'scope':
-      $('.lime-detail-scope').remove()
-      $('[data-step="1-b"]').find('.lime-section-text').toggleClass('active')
-      $('[data-step="1-b"]').find('.lime-section.lime-ball').toggleClass('d-none')
-      $('[data-step="1"]').find('.lime-divider').toggleClass('d-none')
-    break;
-    case 'location':
-      $('.lime-detail-loc').remove()
-      $('[data-step="2"]').find('.lime-section-text').toggleClass('active')
-      $('[data-step="2"]').find('.lime-section.lime-ball').toggleClass('d-none')
-    break;
-    case 'problem':
-      $('.lime-detail-problem').remove()
-
-      if ($('[data-step="3"]').find('.lime-section-text').hasClass('active')) {
-        $('[data-step="3"]').find('.lime-section-text').toggleClass('active')
-        $('[data-step="3"]').find('.lime-section').toggleClass('d-none')
-      }
-    break;
-    case 'short-problem':
-      $('.lime-detail-problem').remove()
-
-      if ($('[data-step="3"]').find('.lime-section-text').hasClass('active')) {
-        $('[data-step="3"]').find('.lime-section-text').toggleClass('active')
-        $('[data-step="3"]').find('.lime-section').toggleClass('d-none')
-      }
-    break;
-    case 'wr':
-      $('.lime-detail-wr').remove()
-
-      if ($('[data-step="3"]').find('.lime-section-text').hasClass('active')) {
-        $('[data-step="3"]').find('.lime-section-text').toggleClass('active')
-        $('[data-step="3"]').find('.lime-section').toggleClass('d-none')
-      }
-
-      $('[data-step="2"]').find('.lime-divider').toggleClass('d-none')
-    break;
-    case 'IME':
-      $('.lime-detail-IME').remove()
-    break;
-  }
 }
