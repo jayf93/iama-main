@@ -1,9 +1,9 @@
 // will init this as a jQuery function
-if (jQuery) jQuery.fn.animateForm = function(props = {}) {
+if (jQuery) jQuery.fn.iama = function(props = {}) {
     props.container = this.selector; // init it with the selector
 
     if (!props.project || !props.flow) throw new Error('ERROR: iama needs a project ID and Flow ID to continue.')
-    return new AnimateForm(props); // Pass to the AnimateForm Constructor to create the form
+    return new IAMA(props); // Pass to the AnimateForm Constructor to create the form
 };
 
 // TODO:
@@ -14,7 +14,7 @@ if (jQuery) jQuery.fn.animateForm = function(props = {}) {
 // - Pass the event into the trigger callback so that it can be manipulated - (useful for type checking with an input box)
 
 // primary class for the animateForm function
-class AnimateForm {
+class IAMA {
   constructor(props){
     this.container = props.container || "#iama"; // primary container
     this.pathObj = props.pathObj || false; // object with path parameters
@@ -64,8 +64,6 @@ class AnimateForm {
 
     $(window).on('beforeunload', e => { // if the person leaves, record them leaving as an 'ended session'
       _this.logPixelEvent({
-        user: _this.user,
-        session: _this.session,
         stage: 'end_session',
         value: 'end_session'
       })
@@ -138,7 +136,6 @@ class AnimateForm {
   init(){ // initialises the function
     this.getPathObj() // grab the local or remote path file
     .then(path => {
-      console.log(path)
       this.pathObj = path;
       let initMsg = path[this.start][0] // intial path is loaded
       let a = new AnimateMessage(initMsg, this.start).render() // initial path is rendered
@@ -153,15 +150,18 @@ class AnimateForm {
   }
   triggerCallback(){ // trigger a callback when a button is clicked
     // this is to be overwritten with a function via the options
+    return null;
   }
   triggerPath(){ // trigger during a path transition
     // this is to be overwritten with a function via the options
+    return null;
   }
   triggerEnd(){ // trigger a callback when the path reaches an end
     // this is to be overwritten with a function via the options
+    return null;
   }
   getPrevious(){
-      return this.history[this.history.length-1]
+      return this.history[this.history.length-1];
   }
   initListeners(){ // intiialises the listeners for the clicks
     if ($('.animate-message-action-button')) $('.animate-message-action-button').off().click(e => this.manageRoutes(e)); // reset the on-click listeners
