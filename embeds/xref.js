@@ -18,258 +18,6 @@ var generateOptDescription = type => {
   }
 }
 
-var generateOptCheckboxes = (type, scope) => {
-  console.log('type is ' + type)
-  let html;
-  switch(type){
-    case 'IME with an Occupational Physician':  // THIS IS THE ONE THAT I HAVE ADDED THE QUESTION DATA
-      html = `<div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-accuracy-diagnosis"
-                  data-action="accuracy-diagnosis"
-                  data-verbose="Accuracy of diagnosis"
-                  data-question="Does the diagnosis match the clinical presentation?">
-                <label for="checkbox-accuracy-diagnosis"><b>Accuracy of diagnosis</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-cause-injury" data-action="cause-of-injury" data-verbose="Cause of injury"
-                  data-question="Is the described mechanism of injury consistent with the current diagnosis? OR What is the most likely diagnosis considering the mechanism of injury?">
-                <label for="checkbox-cause-injury"><b>Cause injury / Illness</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-best-practice-treatment" data-action="best-practice-treatment" data-verbose="Best Practice Treatment for this condition"
-                  data-question="Is the current treatment and planned treatment appropriate? OR What is the best practice treatment for this condition?">
-                <label for="checkbox-best-practice-treatment"><b>Best Practice Treatment for this condition</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-rehab" data-action="rehab-and-timeframes" data-verbose="Likely rehabilitation & timeframes"
-                  data-question="What are your recommendations on Rehabilitation, return to work and timeframes for recovery?">
-                <label for="checkbox-rehab"><b>Likely rehabilitation & timeframes</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-return-to-work-guidance" data-action="return-to-work-guidance" data-verbose="Return to Work Guidance (short, medium and long terms)" data-question="Please provide expert guidance on Return to work in the short (3-6months), medium (6-12months) or Long term (>12 months)">
-                <label for="checkbox-return-to-work-guidance"><b>Return to Work Guidance (short, medium and long terms)</b></label>
-              </div>`
-
-        if (scope === "Lawyer") {
-          html+= `<div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-return-to-work-safely" data-action="return-to-work-sagely" data-verbose="Ability to Safely return to work"
-                  data-question="Can worker safely perform the essential inherent requirements of the role without restrictions or accommodations? ">
-                <label for="checkbox-return-to-work-safely"><b>Ability to Safely return to work</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-work-restrictions" data-action="work-restrictions" data-verbose="Any restrictions that may be required to remain safe at work"
-                  data-question="What restrictions are required to ensure worker doesn’t suffer a further injury or illness related to their condition?">
-                <label for="checkbox-work-restrictions"><b>Any restrictions that may be required to remain safe at work</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-alternate-roles" data-action="alternate-roles" data-verbose="If worker can perform any alternate roles"
-                  data-question="What other roles could the worker safely perform - <i>please provide potential other roles you know to be available or vocational assessments that have been done.</i>">
-                <label for="checkbox-alternate-roles"><b>If worker can perform any alternate roles</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-current-treatment" data-action="current-treatment" data-verbose="Current Treatment and potential to Impact on safety at work"
-                  data-question="Do any current medication or other treatments potentially pose a risk to safety in the workplace?">
-                <label for="checkbox-current-treatment"><b>Current Treatment and potential to Impact on safety at work</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-impairment-level" data-action="impairment-level" data-verbose="Level of Impairment"
-                  data-question="What is the level of permanent impairment in accordance with American Medical Association guides (AMA4/5)">
-                <label for="checkbox-impairment-level"><b>Level of Impairment</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-preexisting-impact" data-action="preexisting-impact" data-verbose="Impact of pre-existing conditions on Impairment"
-                  data-question="Is there any impairment arising from pre-existing conditions that are relevant in this case?">
-                <label for="checkbox-preexisting-impact"><b>Impact of pre-existing conditions on Impairment</b></label>
-              </div>`
-        } else if (scope === "Insurer") {
-          html+=`<div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-return-to-work-safely" data-action="return-to-work-sagely" data-verbose="Ability to Safely return to work"
-                  data-question="Can worker safely perform the essential inherent requirements of the role without restrictions or accommodations? ">
-                <label for="checkbox-return-to-work-safely"><b>Ability to Safely return to work</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-work-restrictions" data-action="work-restrictions" data-verbose="Any restrictions that may be required to remain safe at work"
-                  data-question="What restrictions are required to ensure worker doesn’t suffer a further injury or illness related to their condition?">
-                <label for="checkbox-work-restrictions"><b>Any restrictions that may be required to remain safe at work</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-alternate-roles" data-action="alternate-roles" data-verbose="If worker can perform any alternate roles"
-                  data-question="What other roles could the worker safely perform - <i>please provide potential other roles you know to be available or vocational assessments that have been done.</i>">
-                <label for="checkbox-alternate-roles"><b>If worker can perform any alternate roles</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-current-treatment" data-action="current-treatment" data-verbose="Current Treatment and potential to Impact on safety at work"
-                  data-question="Do any current medication or other treatments potentially pose a risk to safety in the workplace?">
-                <label for="checkbox-current-treatment"><b>Current Treatment and potential to Impact on safety at work</b></label>
-              </div>`
-        }
-
-        return html;
-
-    break;
-    case 'IME with another Specialist':
-      html = `<div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-accuracy-diagnosis"
-                  data-action="accuracy-diagnosis"
-                  data-verbose="Accuracy of diagnosis"
-                  data-question="Does the diagnosis match the clinical presentation?">
-                <label for="checkbox-accuracy-diagnosis"><b>Accuracy of diagnosis</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-cause-injury" data-action="cause-of-injury" data-verbose="Cause of injury"
-                  data-question="Is the described mechanism of injury consistent with the current diagnosis? OR What is the most likely diagnosis considering the mechanism of injury?">
-                <label for="checkbox-cause-injury"><b>Cause injury / Illness</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-best-practice-treatment" data-action="best-practice-treatment" data-verbose="Best Practice Treatment for this condition"
-                  data-question="Is the current treatment and planned treatment appropriate? OR What is the best practice treatment for this condition?">
-                <label for="checkbox-best-practice-treatment"><b>Best Practice Treatment for this condition</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-rehab" data-action="rehab-and-timeframes" data-verbose="Likely rehabilitation & timeframes"
-                  data-question="What are your recommendations on Rehabilitation, return to work and timeframes for recovery?">
-                <label for="checkbox-rehab"><b>Likely rehabilitation & timeframes</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-return-to-work-guidance" data-action="return-to-work-guidance" data-verbose="Return to Work Guidance (short, medium and long terms)" data-question="Please provide expert guidance on Return to work in the short (3-6months), medium (6-12months) or Long term (>12 months)">
-                <label for="checkbox-return-to-work-guidance"><b>Return to Work Guidance (short, medium and long terms)</b></label>
-              </div>`
-
-        if (scope === "Lawyer") {
-          html+= `<div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-return-to-work-safely" data-action="return-to-work-sagely" data-verbose="Ability to Safely return to work"
-                  data-question="Can worker safely perform the essential inherent requirements of the role without restrictions or accommodations? ">
-                <label for="checkbox-return-to-work-safely"><b>Ability to Safely return to work</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-work-restrictions" data-action="work-restrictions" data-verbose="Any restrictions that may be required to remain safe at work"
-                  data-question="What restrictions are required to ensure worker doesn’t suffer a further injury or illness related to their condition?">
-                <label for="checkbox-work-restrictions"><b>Any restrictions that may be required to remain safe at work</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-alternate-roles" data-action="alternate-roles" data-verbose="If worker can perform any alternate roles"
-                  data-question="What other roles could the worker safely perform - <i>please provide potential other roles you know to be available or vocational assessments that have been done.</i>">
-                <label for="checkbox-alternate-roles"><b>If worker can perform any alternate roles</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-current-treatment" data-action="current-treatment" data-verbose="Current Treatment and potential to Impact on safety at work"
-                  data-question="Do any current medication or other treatments potentially pose a risk to safety in the workplace?">
-                <label for="checkbox-current-treatment"><b>Current Treatment and potential to Impact on safety at work</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-impairment-level" data-action="impairment-level" data-verbose="Level of Impairment"
-                  data-question="What is the level of permanent impairment in accordance with American Medical Association guides (AMA4/5)">
-                <label for="checkbox-impairment-level"><b>Level of Impairment</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-preexisting-impact" data-action="preexisting-impact" data-verbose="Impact of pre-existing conditions on Impairment"
-                  data-question="Is there any impairment arising from pre-existing conditions that are relevant in this case?">
-                <label for="checkbox-preexisting-impact"><b>Impact of pre-existing conditions on Impairment</b></label>
-              </div>`
-        } else if (scope === "Insurer") {
-          html+=`<div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-return-to-work-safely" data-action="return-to-work-sagely" data-verbose="Ability to Safely return to work"
-                  data-question="Can worker safely perform the essential inherent requirements of the role without restrictions or accommodations? ">
-                <label for="checkbox-return-to-work-safely"><b>Ability to Safely return to work</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-work-restrictions" data-action="work-restrictions" data-verbose="Any restrictions that may be required to remain safe at work"
-                  data-question="What restrictions are required to ensure worker doesn’t suffer a further injury or illness related to their condition?">
-                <label for="checkbox-work-restrictions"><b>Any restrictions that may be required to remain safe at work</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-alternate-roles" data-action="alternate-roles" data-verbose="If worker can perform any alternate roles"
-                  data-question="What other roles could the worker safely perform - <i>please provide potential other roles you know to be available or vocational assessments that have been done.</i>">
-                <label for="checkbox-alternate-roles"><b>If worker can perform any alternate roles</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-current-treatment" data-action="current-treatment" data-verbose="Current Treatment and potential to Impact on safety at work"
-                  data-question="Do any current medication or other treatments potentially pose a risk to safety in the workplace?">
-                <label for="checkbox-current-treatment"><b>Current Treatment and potential to Impact on safety at work</b></label>
-              </div>`
-        }
-
-        return html;
-
-    break;
-    case 'FFD with an Occupational Physician': // THIS IS THE ONE THAT I HAVE ADDED THE QUESTION DATA
-      return `<div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-current-diagnosis" data-action="current-diagnosis" data-verbose="Current Diagnosis"
-                  data-question="What is the current diagnosis?">
-                <label for="checkbox-current-diagnosis"><b>Current Diagnosis</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-return-ability" data-action="ability-to-return" data-verbose="Ability to Safely return to the Role"
-                  data-question="Can worker safely perform the essential inherent requirements of the role without restrictions or accommodations?">
-                <label for="checkbox-return-ability"><b>Ability to Safely return to the Role</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-work-safe-restrictions" data-action="work-safe-restrictions" data-verbose="Any restrictions that may be required to remain safe at work" data-question="What restrictions are required to ensure worker doesn’t suffer a further injury or illness related to their condition?">
-                <label for="checkbox-work-safe-restrictions"><b>Any restrictions that may be required to remain safe at work</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-alternate-roles" data-action="alternate-roles" data-verbose="If worker can perform any alternate roles"
-                  data-question="What other roles could the worker safely perform - please provide potential other roles you have available">
-                <label for="checkbox-alternate-roles"><b>If worker can perform any alternate roles</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-current-treatment-impact" data-action="current-treatment-impact" data-verbose="Current treatment and potential impact on safety at work" data-question="Do any current medication or other treatments potentially pose a risk to safety in the workplace?">
-                <label for="checkbox-current-treatment-impact"><b>Current treatment and potential impact on safety at work</b></label>
-              </div>`
-    break;
-    case 'FFD with another Specialist':
-      return `<div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-current-diagnosis" data-action="current-diagnosis" data-verbose="Current Diagnosis"
-                  data-question="What is the current diagnosis?">
-                <label for="checkbox-current-diagnosis"><b>Current Diagnosis</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-return-ability" data-action="ability-to-return" data-verbose="Ability to Safely return to the Role"
-                  data-question="Can worker safely perform the essential inherent requirements of the role without restrictions or accommodations?">
-                <label for="checkbox-return-ability"><b>Ability to Safely return to the Role</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-work-safe-restrictions" data-action="work-safe-restrictions" data-verbose="Any restrictions that may be required to remain safe at work" data-question="What restrictions are required to ensure worker doesn’t suffer a further injury or illness related to their condition?">
-                <label for="checkbox-work-safe-restrictions"><b>Any restrictions that may be required to remain safe at work</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-alternate-roles" data-action="alternate-roles" data-verbose="If worker can perform any alternate roles"
-                  data-question="What other roles could the worker safely perform - please provide potential other roles you have available">
-                <label for="checkbox-alternate-roles"><b>If worker can perform any alternate roles</b></label>
-              </div>
-              <div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-current-treatment-impact" data-action="current-treatment-impact" data-verbose="Current treatment and potential impact on safety at work" data-question="Do any current medication or other treatments potentially pose a risk to safety in the workplace?">
-                <label for="checkbox-current-treatment-impact"><b>Current treatment and potential impact on safety at work</b></label>
-              </div>`
-    break;
-    default: // if there is no value from above found
-      return `<div class="col-sm-5 animate-advice-card">
-                <input type="checkbox" class="advice-options-check" id="checkbox-error" data-action="error">
-                <label for="checkbox-error"><b>No data inputted for these options yet</b></label>
-              </div>`
-      // return `<div class="col-sm-5 animate-advice-card">
-      //           <input type="checkbox" class="advice-options-check" id="checkbox-accuracy-diagnosis" data-action="accuracy-diagnosis">
-      //           <label for="checkbox-accuracy-diagnosis"><b>Accuracy of diagnosis</b></label>
-      //         </div>
-      //         <div class="col-sm-5 animate-advice-card">
-      //           <input type="checkbox" class="advice-options-check" id="checkbox-cause-injury" data-action="cause-of-injury">
-      //           <label for="checkbox-cause-injury"><b>Cause injury</b></label>
-      //         </div>
-      //         <div class="col-sm-5 animate-advice-card">
-      //           <input type="checkbox" class="advice-options-check" id="checkbox-best-practice-treatment" data-action="best-practice-treatment">
-      //           <label for="checkbox-best-practice-treatment"><b>Best Practice Treatment for this condition</b></label>
-      //         </div>
-      //         <div class="col-sm-5 animate-advice-card">
-      //           <input type="checkbox" class="advice-options-check" id="checkbox-rehab" data-action="rehab-and-timeframes">
-      //           <label for="checkbox-rehab"><b>Likely rehabilitation & timeframes</b></label>
-      //         </div>
-      //         <div class="col-sm-5 animate-advice-card">
-      //           <input type="checkbox" class="advice-options-check" id="checkbox-return-to-work-guidance" data-action="return-to-work-guidance">
-      //           <label for="checkbox-return-to-work-guidance"><b>Return to Work Guidance (short, medium and long terms)</b></label>
-      //         </div>`
-    break;
-  }
-}
 
 var generateOptQuestions = questions => {
 
@@ -283,36 +31,6 @@ var generateOptQuestions = questions => {
   return html
 
 }
-
-var generateResultDescription = (value, scope) => {
-
-  if (value.includes('IME')) {
-    return `<div class="animate-booking-outcome mb-2"><span><b>Independent Medical Examination</b></span></div><div class="animate-booking-outcome-desc mb-2"><span>Our medical specialists provide an accurate assessment of a person’s function – through an independent lens. Understanding and quantifying the impact of a condition on an individual, and their work is our speciality.</span></div>
-                      <div class="animate-outcome-more"><a href="/lime-services/independent-medical-examination" target="_blank"><span><b>more info</b></span></a></div>`
-  } else if (value.includes('FFD')) {
-    return `<div class="animate-booking-outcome mb-2"><span><b>Fitness for Duty Assessment</b></span></div><div class="animate-booking-outcome-desc mb-2"><span>As a nation, we are getting older, heavier and more sedentary. These factors often mean an increase in health conditions and injuries in the workforce.</span></div>
-                      <div class="animate-outcome-more"><a href="/lime-services/fitness-for-duty" target="_blank"><span><b>more info</b></span></a></div>`
-  } else if (value.includes('File Review')) {
-    return `<div class="animate-booking-outcome mb-2"><span><b>File Review</b></span></div><div class="animate-booking-outcome-desc mb-2"><span>Typically, a Forensic Assessment is performed as a desktop file review, but it may also involve an assessment of an individual, their workplace, or the site of an accident.</span></div>
-                      <div class="animate-outcome-more"><a href="/lime-services/forensic-assessment" target="_blank"><span><b>more info</b></span></a></div>`
-  } else { // TODO: Make sure that the file review has the description in here
-    return '';
-  }
-
-  // <div class="animate-booking-outcome mb-2"><span><b>Independent Medical Examination</b></span></div><div class="animate-booking-outcome-desc mb-2"><span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</span></div>
-  //                     <div class="animate-outcome-more"><span><b>more info</b></span></div>
-}
-
-// IME with an Occupational Physician
-// IME with another Specialist
-// FFD with an Occupational Physician
-// FFD with another Specialist
-// // rest to do
-// IME / FFD with an Occupational Physician
-// IME / FFD with another Specialist
-// IME with a Psychiatrist
-// I want to know if treatment is on the right track
-// File Review with an Occupational Physician
 
 // actions for when the window is ready
 let aF, aO, qO;
@@ -361,7 +79,7 @@ $(window).ready(() => {
     triggerEnd: e => parseEnd(e),
     // triggerPath: (p, d, props) => parsePath(p, d, props),
     pathObj,
-    project: "jay",
+    project: "jay_tester",
     flow: "test",
     stepPercentage: 20,
     history: validateHistory(params) // augments the beginning history to start it with some history
@@ -369,7 +87,6 @@ $(window).ready(() => {
   if (params.has('p')) {
     let type = params.get('t'),
         s = params.get('s');
-    updateSidebar(type);
     aF.dataObj['scope'] = type;
     // $('.animate-message-inner').append(insertBackButton()); // add the back button
     // $('.lime-back-btn-container').click(e => handleBack(e)); // add listeners to the back button
@@ -461,16 +178,6 @@ var validateHistory = params => {
   }
 }
 
-var updateSidebar = type => {
-  html = `<span class="lime-detail lime-detail-scope"><b>- ${type}</b></span>`
-  $('.lime-about').append(html)
-  $('[data-step="1-b"]').find('.lime-section-text').toggleClass('active')
-  $('[data-step="1-b"]').find('.lime-section.lime-ball').toggleClass('d-none')
-  $('[data-step="1"]').find('.lime-divider').toggleClass('d-none')
-  dataObj.scope = type;
-}
-
-
 // function to parse the callback response when a button is clicked
 // will be used to manipulate the sidebar
 var parseCallbacks = e => {
@@ -559,48 +266,10 @@ var parseCallbacks = e => {
 }
 
 var parseEnd = e => { // triggered at the end of the flow
-  console.log(e, 'THIS IS THE END')
   setTimeout(function(){ // slight delay to ensure that the dataObject is correctly populated
     createResult(e.IME, e.scope) // will be used to mutate the end options for the user
   }, 50)
 
-}
-
-var resetSidebarActions = () => { // removes all of the sidebar slugs if the user starts from the start again
-  $('.lime-detail-scope, .lime-detail-wr, .lime-detail-diagnosis, .lime-detail-IME, .lime-detail-problem, .lime-detail-loc').remove()
-  $('[data-step="1-b"]').find('.lime-breadcrumb').attr('onclick', null)
-  $('[data-step="2"]').find('.lime-breadcrumb').attr('onclick', null)
-  $('[data-step="3"]').find('.lime-breadcrumb').attr('onclick', null)
-  $('[data-step="3"], [data-step="2"]').find('.lime-section-text').removeClass('active')
-  $('[data-step="3"], [data-step="2"]').find('.lime-section').addClass('d-none');
-  aF.history = aF.history.splice(1,1); // resetting the history for "new paths"
-  aF.history.unshift({ // push the start message to the start of the history so that we can only go back to the scope identifier
-    "message" : "I am a...",
-    "buttons" : [
-      {
-      "text" : "Employer",
-      "path" : "employer_a"
-      },
-      {
-      "text" : "Lawyer",
-      "path" : "lawyer"
-      },
-      {
-      "text" : "Insurer",
-      "path" : "insurer"
-      },
-      {
-      "text" : "Worker",
-      "path" : "worker"
-      }
-    ],
-    "data" : {
-      "stage" : "scope",
-      "id" : "scope"
-    },
-    "path" : "a",
-    "previous" : "a"
-  })
 }
 
 var prepareSwitchRoute = path => {
