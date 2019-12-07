@@ -1,0 +1,81 @@
+body {
+  background: #2c3e50 ;
+}
+.iama-main-side {
+  background: #FFF;
+}
+.lime-logo-sidebar svg {
+  max-width: 125px;
+}
+.lime-logo-sidebar {
+  margin-top: 1.5rem!important;
+  margin-left: 2rem;
+  text-align: inherit;
+}
+.animate-message-action-checkbox.checked {
+  border: 1px solid #94D500;
+}
+.animate-message-action-checkbox.checked .animate-button-carat {
+  color: #94D500;
+}
+
+#iama-sidebar-text-na {
+  font-size: 2.5rem;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.xref-green {
+  color: #ff6f20;
+}
+.xref-hero-txt, .xref-testimonial-container {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.xref-testimonial-txt {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.75);
+}
+
+.iama-perm-progress {
+  width: 100%;
+  background: rgba(255, 111, 32, 0.25);
+  min-height: 10px;
+  border-radius: 5px;
+}
+.iama-perm-progress-bar {
+  background: #ff6f20;
+  width: 0%;
+  height: 10px;
+  border-radius: 5px;
+}
+
+
+
+/* This is temporary */
+.brodie-spin.rotation {
+  -webkit-animation-duration: 0.25s;
+  animation-duration: 0.25s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-name: rotation;
+  animation-name: rotation;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  transform-origin: right center;
+}
+
+@keyframes rotation {
+  from {
+    -webkit-transform: rotate3d(0, 0, 1, 0deg);
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+
+  to {
+    -webkit-transform: rotate3d(0, 0, 1, 360deg);
+    transform: rotate3d(0, 0, 1, 360deg);
+  }
+}
