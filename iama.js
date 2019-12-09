@@ -31,6 +31,7 @@ class AnimateForm {
     this.user = this.getUser(); // retrieves or creates a user for this device
     this.pixelF; // unassigned pixel frame
     this.stepPercentage = props.stepPercentage || 10;
+    this.google_analytics = props.google_analytics || false;
     this.init(); // initialises the function
   }
 
@@ -85,6 +86,7 @@ class AnimateForm {
       $('.iama-perm-progress-bar').animate({
         width: $('.iama-perm-progress-bar').width((i, val) => val+= $('.iama-perm-progress-bar').width() >= $('.iama-perm-progress').width() ? 0 : ($('.iama-perm-progress').width() * (this.stepPercentage / 100)))
       })
+      if (this.google_analytics && ga) ga('event', 'send', 'iama-event', 'step', path.message, this.user);
     } else {
       $('.iama-perm-progress-bar').animate({
         width: $('.iama-perm-progress-bar').width((i, val) => val-= $('.iama-perm-progress-bar').width() <= 0 ? 0 : ($('.iama-perm-progress').width() * (this.stepPercentage / 100)))

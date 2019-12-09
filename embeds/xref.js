@@ -317,34 +317,34 @@ var generateResultDescription = (value, scope) => {
 // actions for when the window is ready
 let aF, aO, qO;
 $(window).ready(() => {
-  $('body').prepend(`<div class="row no-margin">
-    <div class="col-lg-4 lime-sidebar-main">
-      <span class="ml-2 d-none">Sidebar</span>
-      <div class="lime-logo-sidebar mt-5">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3415 714">
-          <path d="M3415 80.5v-79h-486v711h79.5v-316h373v-79h-373v-237H3415zM2532 80.5v-79h-486v711h486v-79h-407v-237h373v-79h-373v-237h407zM1599.5 712.5H1702l-260.5-316h10.5c109 0 197.5-88.5 197.5-197.5S1561 1.5 1452 1.5h-328.5v711h79v-316h136zm-397-632H1452a118.5 118.5 0 0 1 0 237h-249.5z"></path>
-          <g fill="#95d600">
-            <path d="M0 56L66 1.5 359.5 357 66 712.5l-66-55L248.5 357 0 56zM726 56L660.5 1.5 366.5 357l294 355.5 65.5-55L477.5 357 726 56z"></path>
-          </g>
-        </svg>
-      </div>
-      <div class="container" id="iama-sidebar-text-na" style="top:20%;">
-        <div class="xref-hero-txt">
-          <span>A few details about your <span class="xref-green">business</span></span>
-        </div>
-      </div>
-      <div class="xref-testimonial-container">
-        <span class="xref-testimonial-txt">
-        "Using Xref frees up time for <span class="xref-green">more strategic talent</span> acquisition tasks, and enables Qantas to reduce the possibility of reference fraud..."
-        </span>
-      </div>
-    </div>
-    <div class="col-lg-8 overflow-auto iama-main-side">
-        <div id="iama" style="height:100vh;">
-          <span></span>
-        </div>
-    </div>
-  </div>`)
+  // $('body').prepend(`<div class="row no-margin">
+  //   <div class="col-lg-4 lime-sidebar-main">
+  //     <span class="ml-2 d-none">Sidebar</span>
+  //     <div class="lime-logo-sidebar mt-5">
+  //       <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3415 714">
+  //         <path d="M3415 80.5v-79h-486v711h79.5v-316h373v-79h-373v-237H3415zM2532 80.5v-79h-486v711h486v-79h-407v-237h373v-79h-373v-237h407zM1599.5 712.5H1702l-260.5-316h10.5c109 0 197.5-88.5 197.5-197.5S1561 1.5 1452 1.5h-328.5v711h79v-316h136zm-397-632H1452a118.5 118.5 0 0 1 0 237h-249.5z"></path>
+  //         <g fill="#95d600">
+  //           <path d="M0 56L66 1.5 359.5 357 66 712.5l-66-55L248.5 357 0 56zM726 56L660.5 1.5 366.5 357l294 355.5 65.5-55L477.5 357 726 56z"></path>
+  //         </g>
+  //       </svg>
+  //     </div>
+  //     <div class="container" id="iama-sidebar-text-na" style="top:20%;">
+  //       <div class="xref-hero-txt">
+  //         <span>A few details about your <span class="xref-green">business</span></span>
+  //       </div>
+  //     </div>
+  //     <div class="xref-testimonial-container">
+  //       <span class="xref-testimonial-txt">
+  //       "Using Xref frees up time for <span class="xref-green">more strategic talent</span> acquisition tasks, and enables Qantas to reduce the possibility of reference fraud..."
+  //       </span>
+  //     </div>
+  //   </div>
+  //   <div class="col-lg-8 overflow-auto iama-main-side">
+  //       <div id="iama" style="height:100vh;">
+  //         <span></span>
+  //       </div>
+  //   </div>
+  // </div>`)
   let params = (new URL(document.location)).searchParams;
   let start = params.get("s") || 'name';
   var isMobile = false; //initiate as false
@@ -364,6 +364,7 @@ $(window).ready(() => {
     project: "jay",
     flow: "test",
     stepPercentage: 20,
+    google_analytics: true,
     history: validateHistory(params) // augments the beginning history to start it with some history
   })
   if (params.has('p')) {
