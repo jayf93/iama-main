@@ -5,14 +5,13 @@ $(window).ready(() => {
     <div class="col-lg-4 lime-sidebar-main">
       <span class="ml-2 d-none">Sidebar</span>
       <div class="lime-logo-sidebar mt-5">
-        <img src="https://uploads-ssl.webflow.com/5dd713aa4e896a30d5457cef/5dd713aa4e896a6e0a457d4f_pedley_logo.svg">
+        <img class="pedleys-logo" src="https://uploads-ssl.webflow.com/5dd713aa4e896a30d5457cef/5dd713aa4e896a6e0a457d4f_pedley_logo.svg">
       </div>
       <div class="container" id="iama-sidebar-text-na" style="top:20%;">
-        <img class="brodie-spin" src="../img/brodie.png" style="width:1px;height:1px;max-height:80%;max-width:100%">
       </div>
-      <div class="xref-testimonial-container">
+      <div class="text-testimonial-container">
         <span class="xref-testimonial-txt">
-        "Using Xref frees up time for <span class="xref-green">me to mess with brodie</span> and do other pointless tasks, and enables Qantas to reduce the possibility of reference fraud..."
+        "Stuff can <span class="xref-green">go in here.</span>"
         </span>
       </div>
     </div>
@@ -81,14 +80,14 @@ var setEvents = () => {
   })
 
 
-  iama.events.on('any', e => {
-    let angle = ($('.brodie-spin').data('angle') + 90) || 90;
-    $('.brodie-spin').removeClass('rotation').animate({
-      width:  $('.brodie-spin').width() * 2,
-      height: $('.brodie-spin').height() * 2
-    }).addClass('rotation');
-
-  })
+  // iama.events.on('any', e => {
+  //   let angle = ($('.brodie-spin').data('angle') + 90) || 90;
+  //   $('.brodie-spin').removeClass('rotation').animate({
+  //     width:  $('.brodie-spin').width() * 2,
+  //     height: $('.brodie-spin').height() * 2
+  //   }).addClass('rotation');
+  //
+  // })
 
   iama.events.on('start', e => {
     $('.iama-perm-progress-bar').width('0%');
@@ -114,6 +113,61 @@ var setEvents = () => {
     $('.iama-perm-progress-bar').width('100%');
   })
 
+  iama.events.on('property_location', e => {
+    $('.animate-message-action-input').replaceWith(`
+       <input id="gsearch-autocomplete" class="animate-message-action-input" placeholder="Enter address" type="text" />`)
+
+     buildGoogleSearch()
+
+  })
+
+  iama.events.on('system_choice_1', e => {
+    // $('#iama').html(systemChoiceHtml())
+  })
+
+}
+
+const systemChoiceHtml = () => {
+  return `
+    <div id="iama-inner-a" class="iama-inner-a">
+      <div class="animate-message-input-container"><input class="animate-message-action-input" type="text" placeholder="plaveholder" data-currentPath="system_choice_1" data-path="a"></input></div>
+    </div>
+    <div id="iama-inner-b" class="iama-inner-b">
+      <div id="iama-perm-progress" class="iama-perm-progress">
+        <div class="iama-perm-progress-bar">
+        </div>
+      </div>
+      ${iama.insertBackButton()}
+    </div>`;
+}
+
+const buildGoogleSearch = () => {
+  const input = document.getElementById('gsearch-autocomplete')
+
+  let bounds = new google.maps.LatLngBounds(
+    new google.maps.LatLng(-10.199342, 112.472406),
+    new google.maps.LatLng(-44.601349, 155.128274));
+
+  let searchBox = new google.maps.places.SearchBox(input, { bounds, strictbounds: true });
+
+  console.log(searchBox)
+  //
+  searchBox.addListener('places_changed', () => {
+
+    let places = searchBox.getPlaces();
+
+    if (!places.length) return null;
+    else {
+      let place = places[0].formatted_address
+
+      $(input).data({
+        value: place,
+        stage: 'property_location',
+        path: 'property_status'
+      })
+      iama.manageRoutes({ target: '#gsearch-autocomplete'});
+    }
+  })
 }
 
 let dataObj = {}; // global obj to be built up with the information
