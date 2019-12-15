@@ -31,6 +31,7 @@ class IAMA {
     this.user = this.getUser(); // retrieves or creates a user for this device
     this.pixelF; // unassigned pixel frame
     this.stepPercentage = props.stepPercentage || 10;
+    this.step_count = typeof props.step_count === "boolean" ? props.step_count : false;
     this.version = '0.2.0'; // current version of the IAMA tool
     this.init(); // initialises the function
   }
@@ -85,8 +86,8 @@ class IAMA {
     if (!data.path || data.path === "undefined" || data.end) return this.triggerEnd(this.dataObj); // will trigger an end of path callback
 
     let path = this.pathObj[data.path][0]; // the path from the action
-    console.log(path);
-    let m = new AnimateMessage(Object.assign(path, { previous: data.path }), data.path).render(); // render the path
+    console.log(this.history.length)
+    let m = new AnimateMessage(Object.assign(path, { previous: data.path }), data.path, this).render(); // render the path
     // $(this.container).html(m); // add it to the form
     $(this.container).hide().html(m).fadeIn();
     if (!props.previous) {
@@ -138,7 +139,7 @@ class IAMA {
     .then(path => {
       this.pathObj = path;
       let initMsg = path[this.start][0] // intial path is loaded
-      let a = new AnimateMessage(initMsg, this.start).render() // initial path is rendered
+      let a = new AnimateMessage(initMsg, this.start, this).render() // initial path is rendered
       $(this.container).html(`<div id="iama-inner-a" class="iama-inner-a"></div><div id="iama-inner-b" class="iama-inner-b"><div id="iama-perm-progress" class="iama-perm-progress"><div class="iama-perm-progress-bar"></div></div>${this.insertBackButton()}</div>`); // insert the new containers
       this.container = "#iama-inner-a"; // update the container
       $(this.container).hide().html(a).fadeIn(); // add it to the form
@@ -188,11 +189,12 @@ class IAMA {
         data = $el.data(); // define the target and its data object
 
     data.value = data.value || data.text || $el.val(); // assign a data value if one is not present
+    this.dataObj[data.stage] = data.value;
+
     this.logPixelEvent(data); // log the callback data for tracking
     this.updateSidebar(data);
     this.switchPath(data); // switch the path for the next message;
     this.triggerCallback(data); // fire the callback to the user;
-    this.dataObj[data.stage] = data.value;
   }
   manageChecks(e){
     let $el = !$(e.target).hasClass('animate-message-action-checkbox') ? $(e.target).parents('.animate-message-action-checkbox') : $(e.target);
@@ -229,11 +231,14 @@ class IAMA {
 
 // secondary constructor to create messages
 class AnimateMessage {
-  constructor(props, path){
+  constructor(props, path, iama){
+    console.log(iama)
     this.message = props.message || "Message"; // main question text
     this.buttons = props.buttons || []; // question buttons array
     this.props = props || {};
     this.currentPath = path;
+    this.history = iama.history;
+    this.step_count = iama.step_count;
     this.template_type = props.template_type || 'button';
     this.data = props.data ? Object.assign(props.data, { message: props.message }) : {}; // additional data to put into refs for callbacks
   }
@@ -332,8 +337,16 @@ class AnimateMessage {
     return html // return html string to be added to the button object
   }
 
+  calcStepCount(){
+    if (this.step_count) {
+      return `<div class="iama-msg-step-count">Step ${this.history && this.history.length +1 || 1}</div>`
+    } else {
+      return '';
+    }
+  }
+
   render(){ // renders the message from the path - create the HTML then returns it
-    return `<div class="animate-message"><div class="animate-message-inner"><div class="animate-message-text"><span>${this.message}</span></div><div class="animate-message-buttons">${this.addTemplate()}</div></div></div>`
+    return `<div class="animate-message"><div class="animate-message-inner">${this.calcStepCount()}<div class="animate-message-text"><span>${this.message}</span></div><div class="animate-message-buttons">${this.addTemplate()}</div></div></div>`
   }
 }
 

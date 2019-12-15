@@ -74,7 +74,10 @@ body {
   border-radius: 15px;
 }
 
-.animate-message-action-button:focus, .animate-message-action-input:focus, .animate-message-action-checkbox:focus {
+.animate-message-action-button:focus,
+.animate-message-action-input:focus,
+.animate-message-action-checkbox:focus,
+.iama-next-step-btn:focus {
   outline: none;
 }
 
@@ -160,6 +163,27 @@ body {
   border-radius: 5px;
   border: 2px solid;
   margin-top: 20%;
+}
+
+.iama-msg-step-count {
+  border: 1px solid rgba(0,0,0,0.5);
+  width: fit-content;
+  padding: 0.125rem 0.75rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+
+.iama-next-btn-container {
+  margin-top: 1rem;
+}
+.iama-next-step-btn {
+  float: right;
+  padding: 0.25rem 2rem;
+  background: #2d3e50;
+  color: #FFF;
+  border-radius: 2rem;
+  border: none;
+  outline: none;
 }
 
 #form {
