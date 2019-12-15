@@ -2,20 +2,27 @@
 let iama, aO, qO;
 $(window).ready(() => {
   $('body').prepend(`<div class="row no-margin">
-    <div class="col-lg-4 lime-sidebar-main">
+    <div class="col-lg-6 lime-sidebar-main">
       <span class="ml-2 d-none">Sidebar</span>
       <div class="lime-logo-sidebar mt-5">
         <img class="pedleys-logo" src="https://uploads-ssl.webflow.com/5dd713aa4e896a30d5457cef/5dd713aa4e896a6e0a457d4f_pedley_logo.svg">
       </div>
       <div class="container" id="iama-sidebar-text-na" style="top:20%;">
+        <div class="pedleys-hero-txt">
+          <span>Let's get started! Answer the question on the right to start your quote.</span>
+        </div>
       </div>
       <div class="text-testimonial-container">
-        <span class="xref-testimonial-txt">
-        "Stuff can <span class="xref-green">go in here.</span>"
+        <span class="pedleys-lower-txt">
+          Send a copy of your IAMA to your email at any time by entering your email below
         </span>
+        <div class="iama-emailer-container">
+          <input type="email" placeholder="Enter email..."></input>
+          <button class="button pedleys-secondary-btn">Send</button>
+        </div>
       </div>
     </div>
-    <div class="col-lg-8 overflow-auto iama-main-side">
+    <div class="col-lg-6 overflow-auto iama-main-side">
         <div id="iama" style="height:100vh;">
           <span></span>
         </div>
@@ -39,6 +46,7 @@ $(window).ready(() => {
     pathObj,
     project: "jay_tester",
     flow: "test",
+    step_count: true,
     stepPercentage: 8,
     history: validateHistory(params) // augments the beginning history to start it with some history
   })
@@ -54,31 +62,6 @@ $(window).ready(() => {
 })
 
 var setEvents = () => {
-
-  iama.events.on('loc', e => {
-    console.log('loc step is here')
-    $('.animate-message-action-button').off().click(e => {
-      let location = $(e.target).data('text'),
-          scope = iama.dataObj.scope;
-      iama.dataObj.location = location;
-      switch(scope) {
-        case 'Employer':
-            $(e.target).data('path', 'employer_a')
-          break;
-        case 'Lawyer':
-          $(e.target).data('path', 'lawyer')
-          break;
-        case 'Insurer':
-          $(e.target).data('path', 'insurer')
-          break;
-        case 'Worker':
-          $(e.target).data('path', 'worker')
-          break;
-      }
-      iama.manageRoutes(e);
-    })
-  })
-
 
   // iama.events.on('any', e => {
   //   let angle = ($('.brodie-spin').data('angle') + 90) || 90;
@@ -97,48 +80,84 @@ var setEvents = () => {
     });
   })
 
-  iama.events.on('location', e => {
-    $('.xref-hero-txt').html('<span>A few details about your <span class="xref-green">business</span></span>')
-  })
-
-  iama.events.on('hire_count', e => {
-    $('.xref-hero-txt').html('<span>Let\'s get to know more about your <span class="xref-green">hiring</span></span>')
-  })
-  iama.events.on('hiring_most_important', e => {
-    $('.xref-hero-txt').html('<span>Let\'s get to know more about your <span class="xref-green">hiring</span></span>')
-  })
-
-  iama.events.on('recommendation', e => {
-    $('.xref-hero-txt').html('<span><span class="xref-green">Xref</span> can help.</span>')
-    $('.iama-perm-progress-bar').width('100%');
-  })
 
   iama.events.on('property_location', e => {
-    $('.animate-message-action-input').replaceWith(`
-       <input id="gsearch-autocomplete" class="animate-message-action-input" placeholder="Enter address" type="text" />`)
+    $('.animate-message-action-input').replaceWith(`<input id="gsearch-autocomplete" class="animate-message-action-input" placeholder="Enter address" type="text" />`);
 
      buildGoogleSearch()
 
+     $('#iama-sidebar-text-na').html(`
+       <div class="your-ima-text"><span>Your IAMA</span></div>
+       <div id="iama-txt">
+        <span>Currently I have <span class="pedleys-orange">${iama.dataObj.start === "No solar" ? "no solar" : "an existing solar sytem"}</span> on my property.</span>
+       </div>
+       `)
+
+  })
+
+  iama.events.on('property_status', e => {
+    $('.animate-message-text').text(`At ${iama.dataObj.address_short} I`);
+
+    $('#iama-sidebar-text-na').html(`
+      <div class="your-ima-text"><span>Your IAMA</span></div>
+      <div id="iama-txt">
+       <span>Currently I have <span class="pedleys-orange">${iama.dataObj.start === "No solar" ? "no solar" : "an existing solar sytem"}</span> on my property at <span class="pedleys-orange">${iama.dataObj.address_short}</span>.</span>
+      </div>
+      `)
+  })
+
+  iama.events.on('last_quarterly_bill', e => {
+    $('#iama-sidebar-text-na').html(`
+      <div class="your-ima-text"><span>Your IAMA</span></div>
+      <div id="iama-txt">
+       <span>Currently I have <span class="pedleys-orange">${iama.dataObj.start === "No solar" ? "no solar" : "an existing solar sytem"}</span> on my property at <span class="pedleys-orange">${iama.dataObj.address_short}</span> which I <span class="pedleys-orange">${iama.dataObj.property_status === "Pay rent" ? "rent" : "own"}</span>.</span>
+      </div>
+      `)
+  })
+
+  iama.events.on('property_type', e => {
+    $('.animate-message-text').text(`${iama.dataObj.address_short} is a`)
   })
 
   iama.events.on('system_choice_1', e => {
-    // $('#iama').html(systemChoiceHtml())
+    $('.animate-message-buttons').replaceWith(systemChoiceHtml());
+    $('.iama-next-step-btn').click(e => {
+      let data = { custom_system: true };
+      $('.animate-message-action-input').each((i, el) => {
+        console.log($(el).data())
+        let key = $(el).data('prop');
+        Object.assign(data, { [key]: $(el).val() });
+      })
+      Object.assign(iama.dataObj, data)
+      iama.manageRoutes(e);
+    })
+  })
+
+  iama.events.on('contact_detail', e => {
+    // add the toggle stuff here
   })
 
 }
 
 const systemChoiceHtml = () => {
+  console.log('came through here')
   return `
-    <div id="iama-inner-a" class="iama-inner-a">
-      <div class="animate-message-input-container"><input class="animate-message-action-input" type="text" placeholder="plaveholder" data-currentPath="system_choice_1" data-path="a"></input></div>
-    </div>
-    <div id="iama-inner-b" class="iama-inner-b">
-      <div id="iama-perm-progress" class="iama-perm-progress">
-        <div class="iama-perm-progress-bar">
-        </div>
+      <div class="animate-message-input-container">
+        <span class="pedleys-system-text">System size</span>
+        <input style="margin-top:0.5rem;" data-prop="system_size" class="animate-message-action-input" type="text" placeholder="Enter the size of the system"></input></div>
+      <div class="animate-message-input-container">
+        <span class="pedleys-system-text">Panel type</span>
+        <input style="margin-top:0.5rem;" data-prop="system_panel_type" class="animate-message-action-input" type="text" placeholder="Enter the type of panel"></input></div>
+      <div class="animate-message-input-container">
+        <span class="pedleys-system-text">Inverter type</span>
+        <input style="margin-top:0.5rem;" data-prop="system_inverter_type" class="animate-message-action-input" type="text" placeholder="Enter the type of inverter"></input></div>
+      <div class="animate-message-input-container">
+        <span class="pedleys-system-text">Battery size</span>
+        <input style="margin-top:0.5rem;" data-prop="system_battery" class="animate-message-action-input" type="text" placeholder="Enter the size of the battery"></input></div>
+      <div class="iama-next-btn-container">
+        <button class="button iama-next-step-btn" data-stage="system_choice_1" data-value="custom_system" data-path="contact_detail">Next step</div>
       </div>
-      ${iama.insertBackButton()}
-    </div>`;
+      `
 }
 
 const buildGoogleSearch = () => {
@@ -159,6 +178,8 @@ const buildGoogleSearch = () => {
     if (!places.length) return null;
     else {
       let place = places[0].formatted_address
+
+      iama.dataObj.address_short = places[0].name;
 
       $(input).data({
         value: place,
