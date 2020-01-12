@@ -171,7 +171,7 @@ const pathObj = {
     message: "Please contact me on",
     template_type: 'input',
     input: {
-      placeholder: "Enter contact number",
+      placeholder: "Enter email address or phone number",
       path: "end"
     },
     data: {
@@ -180,7 +180,7 @@ const pathObj = {
     }
   }],
   end: [{
-    message: "fin.",
+    message: "Thank you.",
     buttons: [{
       text: 'restart',
       path: 'start'

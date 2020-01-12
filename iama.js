@@ -108,7 +108,7 @@ class IAMA {
   }
 
   insertBackButton(p, d){
-    return `<div style="display:none;" class="iama-back-btn" id="iama-perm-back"><span>Back</span></div>`; // returns the back button element
+    return `<div style="display:none;" class="iama-back-btn" id="iama-perm-back"><div class="iama-back-symbol"></div><div class="iama-back-txt"><span>Back</span></div></div>`; // returns the back button element
   }
 
   handleBack(e){
@@ -257,7 +257,9 @@ class AnimateMessage {
     return html // pass the button html back
   }
   addInput(input = {}, data = {}) {
-    return `<div class="animate-message-input-container"><input class="animate-message-action-input" type="text" placeholder="${input.placeholder || ""}" data-currentPath="${this.currentPath}" data-path="${input.path}" ${this.returnDataParams(data)}></input></div>`
+    return `<div class="animate-message-input-container"><input class="animate-message-action-input" type="text" placeholder="${input.placeholder || ""}" data-currentPath="${this.currentPath}" data-path="${input.path}" ${this.returnDataParams(data)}></input>      <div class="iama-next-btn-container">
+              <button class="button animate-message-action-button iama-next-step-btn" data-currentPath="${this.currentPath}" data-path="${input.path}" ${this.returnDataParams(data)}>Next step</div>
+            </div></div>`
   }
   addSelect(options = [], data = {}) {
     let html="<option value=''>-- Select One --</option>";

@@ -44,8 +44,26 @@ top: 0px;
   font-size: 1.25rem;
   cursor: pointer;
   margin-top: 3rem;
+  display: flex;
+  height: 45px;
 }
-
+.iama-back-symbol {
+  padding: 20px;
+  border: 2px solid #9B9B9B;
+  border-radius: 25px;
+  line-height: 5px;
+  background: transparent url(img/carat.svg) 0% 0% no-repeat padding-box;
+  background-position: center;
+  margin-right: 1rem;
+  transition: background-color 0.25s ease;
+}
+.iama-back-txt {
+  line-height: 45px;
+  color: #212121;
+}
+.iama-back-btn:hover .iama-back-symbol {
+  background-color: #9B9B9B;
+}
 body {
   font-family: 'Lato', sans-serif;
   background: #f9fafb;
@@ -166,11 +184,12 @@ body {
 }
 
 .iama-msg-step-count {
-  border: 1px solid rgba(0,0,0,0.5);
+  /* border: 1px solid rgba(0,0,0,0.5); */
   width: fit-content;
   padding: 0.125rem 0.75rem;
   border-radius: 1rem;
   margin-bottom: 2rem;
+  background: #F9F9F9;
 }
 
 .iama-next-btn-container {
@@ -184,6 +203,12 @@ body {
   border-radius: 2rem;
   border: none;
   outline: none;
+  width: auto !important;
+  transition: opacity 0.25s ease;
+}
+.iama-next-step-btn:hover {
+  border: none !important;
+  opacity: 0.9;
 }
 
 #form {

@@ -97,3 +97,7 @@ body {
     transform: rotate3d(0, 0, 1, 360deg);
   }
 }
+
+.iama-msg-step-count {
+  background: #ff6f20;
+}

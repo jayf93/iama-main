@@ -9,14 +9,14 @@ $(window).ready(() => {
       </div>
       <div class="container" id="iama-sidebar-text-na" style="top:20%;">
         <div class="pedleys-hero-txt">
-          <span>Let's get started! Answer the question on the right to start your quote.</span>
+          <span>Let's get started! Answer the question on the right to <span class="pedleys-orange">start your quote.</span></span>
         </div>
       </div>
       <div class="text-testimonial-container">
         <span class="pedleys-lower-txt">
-          Send a copy of your IAMA to your email at any time by entering your email below
+          Reviews will go here
         </span>
-        <div class="iama-emailer-container">
+        <div class="iama-emailer-container" style="display:none;">
           <input type="email" placeholder="Enter email..."></input>
           <button class="button pedleys-secondary-btn">Send</button>
         </div>
@@ -44,7 +44,7 @@ $(window).ready(() => {
     triggerEnd: e => parseEnd(e),
     // triggerPath: (p, d, props) => parsePath(p, d, props),
     pathObj,
-    project: "jay_tester",
+    project: "pedleys-27f72e269df8377b0875",
     flow: "test",
     step_count: true,
     stepPercentage: 8,
@@ -74,10 +74,6 @@ var setEvents = () => {
 
   iama.events.on('start', e => {
     $('.iama-perm-progress-bar').width('0%');
-    $('.brodie-spin').animate({
-      width:  '1px',
-      height: '1px'
-    });
   })
 
 
@@ -86,33 +82,57 @@ var setEvents = () => {
 
      buildGoogleSearch()
 
-     $('#iama-sidebar-text-na').html(`
-       <div class="your-ima-text"><span>Your IAMA</span></div>
-       <div id="iama-txt">
-        <span>Currently I have <span class="pedleys-orange">${iama.dataObj.start === "No solar" ? "no solar" : "an existing solar sytem"}</span> on my property.</span>
-       </div>
-       `)
-
+     // $('#iama-sidebar-text-na').html(`
+     //   <div class="your-ima-text"><span>Your IAMA</span></div>
+     //   <div id="iama-txt">
+     //    <span>Currently I have <span class="pedleys-orange">${iama.dataObj.start === "No solar" ? "no solar" : "an existing solar sytem"}</span> on my property.</span>
+     //   </div>
+     //   `)
+     $('.pedleys-hero-txt').html('<span>Help us understand <span class="pedleys-orange">your home.</span></span>')
   })
 
   iama.events.on('property_status', e => {
-    $('.animate-message-text').text(`At ${iama.dataObj.address_short} I`);
+    $('.animate-message-text').text(`At ${iama.dataObj.address_short || "my property"} I`);
 
-    $('#iama-sidebar-text-na').html(`
-      <div class="your-ima-text"><span>Your IAMA</span></div>
-      <div id="iama-txt">
-       <span>Currently I have <span class="pedleys-orange">${iama.dataObj.start === "No solar" ? "no solar" : "an existing solar sytem"}</span> on my property at <span class="pedleys-orange">${iama.dataObj.address_short}</span>.</span>
-      </div>
-      `)
+    // $('#iama-sidebar-text-na').html(`
+    //   <div class="your-ima-text"><span>Your IAMA</span></div>
+    //   <div id="iama-txt">
+    //    <span>Currently I have <span class="pedleys-orange">${iama.dataObj.start === "No solar" ? "no solar" : "an existing solar sytem"}</span> on my property at <span class="pedleys-orange">${iama.dataObj.address_short}</span>.</span>
+    //   </div>
+    //   `)
   })
 
   iama.events.on('last_quarterly_bill', e => {
-    $('#iama-sidebar-text-na').html(`
-      <div class="your-ima-text"><span>Your IAMA</span></div>
-      <div id="iama-txt">
-       <span>Currently I have <span class="pedleys-orange">${iama.dataObj.start === "No solar" ? "no solar" : "an existing solar sytem"}</span> on my property at <span class="pedleys-orange">${iama.dataObj.address_short}</span> which I <span class="pedleys-orange">${iama.dataObj.property_status === "Pay rent" ? "rent" : "own"}</span>.</span>
-      </div>
-      `)
+    // $('#iama-sidebar-text-na').html(`
+    //   <div class="your-ima-text"><span>Your IAMA</span></div>
+    //   <div id="iama-txt">
+    //    <span>Currently I have <span class="pedleys-orange">${iama.dataObj.start === "No solar" ? "no solar" : "an existing solar sytem"}</span> on my property at <span class="pedleys-orange">${iama.dataObj.address_short}</span> which I <span class="pedleys-orange">${iama.dataObj.property_status === "Pay rent" ? "rent" : "own"}</span>.</span>
+    //   </div>
+    //   `)
+  })
+
+
+
+  iama.events.on('property_wiring', e => {
+    $('.pedleys-hero-txt').html('<span>Help us understand <span class="pedleys-orange">your home.</span></span>')
+  })
+
+  iama.events.on('choosing_system', e => {
+    $('.pedleys-hero-txt').html('<span>Tell us more about <span class="pedleys-orange">what you\'re after.</span></span>')
+  })
+
+
+  iama.events.on('system_choice_1', e => {
+    $('.pedleys-hero-txt').html('<span>Tell us more about <span class="pedleys-orange">what you\'re after.</span></span>')
+  })
+  iama.events.on('contact_detail', e => {
+    $('.pedleys-hero-txt').html('<span>What\'s the best way for us to <span class="pedleys-orange">reach you?</span></span>')
+
+    // $('.animate-message-buttons').prepend(`
+    //   <div class="tabs-menu w-tab-menu mt-4 mb-2">
+    //     <a data-w-tab="email" class="tab_main w-inline-block w-tab-link current"><div class="text-block-6">email</div></a>
+    //     <a data-w-tab="phone" class="tab_main w-inline-block w-tab-link"><div class="text-block-6">phone</div></a>
+    //   </div>`)
   })
 
   iama.events.on('property_type', e => {
@@ -169,8 +189,6 @@ const buildGoogleSearch = () => {
 
   let searchBox = new google.maps.places.SearchBox(input, { bounds, strictbounds: true });
 
-  console.log(searchBox)
-  //
   searchBox.addListener('places_changed', () => {
 
     let places = searchBox.getPlaces();
