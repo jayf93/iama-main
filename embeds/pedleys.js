@@ -14,7 +14,7 @@ $(window).ready(() => {
       </div>
       <div class="text-testimonial-container">
         <span class="pedleys-lower-txt">
-          Reviews will go here
+          <span class="pedleys-orange">6,130 Installations Complete.</span> We're committed to providing the best solar power solution and service.
         </span>
         <div class="iama-emailer-container" style="display:none;">
           <input type="email" placeholder="Enter email..."></input>
@@ -47,7 +47,7 @@ $(window).ready(() => {
     project: "pedleys-27f72e269df8377b0875",
     flow: "test",
     step_count: true,
-    stepPercentage: 8,
+    stepPercentage: 10,
     history: validateHistory(params) // augments the beginning history to start it with some history
   })
   if (params.has('p')) {
@@ -62,6 +62,20 @@ $(window).ready(() => {
 })
 
 var setEvents = () => {
+
+  let testimonialArr = [
+    `<span class="pedleys-orange">6,130 Installations Complete.</span> We're committed to providing the best solar power solution and service.`,
+    `<span class="pedleys-orange">$2,110 Average Savings (per year).</span> Whether you have a residential or commercial property, we've got you covered.`,
+    `<span class="pedleys-orange">49,000 KW Installed.</span> We can also help you navigate Solar System Rebates.`
+  ],
+  testimonialIndex = 1;
+
+  setInterval(function(){
+    $('.pedleys-lower-txt').fadeOut('slow', () => {
+      $('.pedleys-lower-txt').html(testimonialArr[testimonialIndex]).fadeIn('slow');
+      testimonialIndex = testimonialIndex === 2 ? 0 : testimonialIndex + 1;
+    })
+  }, 10000)
 
   // iama.events.on('any', e => {
   //   let angle = ($('.brodie-spin').data('angle') + 90) || 90;
@@ -156,6 +170,8 @@ var setEvents = () => {
   iama.events.on('contact_detail', e => {
     // add the toggle stuff here
   })
+
+
 
 }
 

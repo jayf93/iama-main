@@ -147,6 +147,7 @@ body {
 .animate-message, .iama-inner-b {
   width: 100%;
   padding: 3rem 5rem;
+  padding-bottom: 1rem;
   /* box-shadow: 0px 0px 20px; */
   border-radius: 20px;
 }
@@ -197,14 +198,15 @@ body {
 }
 .iama-next-step-btn {
   float: right;
-  padding: 0.25rem 2rem;
-  background: #2d3e50;
+  padding: 0.5rem 3rem;
+  background: #2d3e50 !important;
   color: #FFF;
-  border-radius: 2rem;
+  border-radius: 2rem !important;
   border: none;
   outline: none;
   width: auto !important;
   transition: opacity 0.25s ease;
+  font-size: 0.85rem;
 }
 .iama-next-step-btn:hover {
   border: none !important;

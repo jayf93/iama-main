@@ -184,6 +184,9 @@ const pathObj = {
     buttons: [{
       text: 'restart',
       path: 'start'
+    },{
+      text: 'Trigger end',
+      path: ''
     }],
     data: {
       stage: "end",
