@@ -5,16 +5,16 @@ $(window).ready(() => {
     <div class="col-lg-6 lime-sidebar-main">
       <span class="ml-2 d-none">Sidebar</span>
       <div class="lime-logo-sidebar mt-5">
-        <img class="pedleys-logo" src="https://uploads-ssl.webflow.com/5dd713aa4e896a30d5457cef/5dd713aa4e896a6e0a457d4f_pedley_logo.svg">
+        <img class="pedleys-logo" src="https://www.griffith.edu.au/__data/assets/file/0031/892363/Griffith-College-Logo-New.svg">
       </div>
       <div class="container" id="iama-sidebar-text-na" style="top:20%;">
         <div class="pedleys-hero-txt">
-          <span>Let's get started! Answer the question on the right to <span class="pedleys-orange">start your quote.</span></span>
+          <span>Let's get started! Answer the question on the right to <span class="griffith-red">study with Griffith.</span></span>
         </div>
       </div>
       <div class="text-testimonial-container">
         <span class="pedleys-lower-txt">
-          <span class="pedleys-orange">6,130 Installations Complete.</span> We're committed to providing the best solar power solution and service.
+          <span class="griffith-red">Griffith</span> is cool.
         </span>
         <div class="iama-emailer-container" style="display:none;">
           <input type="email" placeholder="Enter email..."></input>
@@ -47,7 +47,7 @@ $(window).ready(() => {
     project: "pedleys-27f72e269df8377b0875",
     flow: "test",
     step_count: true,
-    stepPercentage: 10,
+    stepPercentage: 8,
     history: validateHistory(params) // augments the beginning history to start it with some history
   })
   if (params.has('p')) {
@@ -64,9 +64,9 @@ $(window).ready(() => {
 var setEvents = () => {
 
   let testimonialArr = [
-    `<span class="pedleys-orange">6,130 Installations Complete.</span> We're committed to providing the best solar power solution and service.`,
-    `<span class="pedleys-orange">$2,110 Average Savings (per year).</span> Whether you have a residential or commercial property, we've got you covered.`,
-    `<span class="pedleys-orange">49,000 KW Installed.</span> We can also help you navigate Solar System Rebates.`
+    `<span class="griffith-red">Griffith</span> is cool.`,
+    `<span class="griffith-red">Griffith</span> is great.`,
+    `I love <span class="griffith-red">Griffith.</span>`
   ],
   testimonialIndex = 1;
 
@@ -253,7 +253,7 @@ let dataObj = {}; // global obj to be built up with the information
 var validateHistory = params => {
   if (params.has('p')) {
 
-    return false; 
+    return false;
   } else {
     return false
   }

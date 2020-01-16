@@ -1,5 +1,5 @@
 body {
-  background: #2c3e50 ;
+  background: #c12525 ;
   font-family: 'Open Sans', sans-serif;
 }
 .iama-main-side {
@@ -72,6 +72,10 @@ body {
 .pedleys-orange {
   color: #ff6f20;
 }
+.griffith-red {
+  color: #000
+}
+
 #iama-txt {
   color: #FFF;
 }
@@ -93,7 +97,7 @@ body {
   border-radius: 5px;
 }
 .iama-perm-progress-bar {
-  background: #2d3e50;
+  background: #c12525;
   width: 0%;
   height: 10px;
   border-radius: 5px;
