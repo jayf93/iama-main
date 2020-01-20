@@ -214,7 +214,7 @@ const contactHtml = () => {
         <span class="pedleys-system-text">Phone or Email Address</span>
         <input style="margin-top:0.5rem;" data-prop="contact_detail" class="animate-message-action-input" type="text" placeholder="Enter email address or phone number"></input></div>
       <div class="iama-next-btn-container">
-        <button class="button iama-next-step-btn" data-stage="contact_detail" data-value="contact_detail" data-path="">Next step</div>
+        <button class="button iama-next-step-btn" data-path="">Next step</div>
       </div>
       `
 }
@@ -253,14 +253,59 @@ let dataObj = {}; // global obj to be built up with the information
 var validateHistory = params => {
   if (params.has('p')) {
 
-    return false; 
+    return false;
   } else {
     return false
   }
 }
 
+const sendEnquiry = () => {
+  let email = {
+    from: 'noreply@pedleys.com.au',
+    to: 'jay@bothello.io'
+  },
+  url = 'https://7yax6waadk.execute-api.ap-southeast-2.amazonaws.com/default/iama-mail',
+  data = iama.dataObj,
+  template_id = 'd-6960931c099f43188b18d6bc1571dafd';
+
+  data = Object.assign(data, { template_id, email });
+
+  $.ajax({
+    type: 'POST',
+    url,
+    data: JSON.stringify(data),
+    dataType: 'json'
+  })
+}
+
+const sendIama = () => {
+  let email = {
+    from: 'noreply@pedleys.com.au',
+    to: 'jay@bothello.io'
+  },
+  url = 'https://7yax6waadk.execute-api.ap-southeast-2.amazonaws.com/default/iama-mail',
+  data = iama.dataObj,
+  template_id = 'd-b2a2bd4f1899448f854a494b71b36397';
+
+  data = Object.assign(data, { template_id, email });
+
+  $.ajax({
+    type: 'POST',
+    url,
+    data: JSON.stringify(data),
+    dataType: 'json'
+  })
+
+}
+
+
 var parseEnd = e => { // triggered at the end of the flow
+
+  sendIama();
+  sendEnquiry();
+
   setTimeout(function(){ // slight delay to ensure that the dataObject is correctly populated
+
     $('.animate-message').hide().html(`
       <div class="animate-message-inner">
         <div class="animate-message-text">
