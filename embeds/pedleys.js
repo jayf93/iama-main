@@ -5,7 +5,9 @@ $(window).ready(() => {
     <div class="col-lg-6 lime-sidebar-main">
       <span class="ml-2 d-none">Sidebar</span>
       <div class="lime-logo-sidebar mt-5">
-        <img class="pedleys-logo" src="https://uploads-ssl.webflow.com/5dd713aa4e896a30d5457cef/5dd713aa4e896a6e0a457d4f_pedley_logo.svg">
+        <a href="/">
+          <img class="pedleys-logo" src="https://uploads-ssl.webflow.com/5dd713aa4e896a30d5457cef/5dd713aa4e896a6e0a457d4f_pedley_logo.svg">
+        </a>
       </div>
       <div class="container" id="iama-sidebar-text-na" style="top:20%;">
         <div class="pedleys-hero-txt">

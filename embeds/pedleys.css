@@ -144,10 +144,10 @@ body {
 }
 
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media only screen and (max-width: 1000px) {
 /* @media (min-width: 320px) { */
   .lime-sidebar-main {
-    height: 20vh;
+    height: 15vh;
   }
   #iama-sidebar-text-na {
     height: auto !important;
@@ -157,11 +157,11 @@ body {
     display: none;
   }
   #iama {
-    height: 80vh !important;
+    height: 70vh !important;
   }
   #iama-inner-a {
-    height: 70vh !important;
-    min-height: 70vh;
+    height: 60vh !important;
+    min-height: 60vh;
   }
   #iama-perm-back {
     font-size: 2.25rem
@@ -174,5 +174,11 @@ body {
   }
   .animate-message-action-button, .animate-message-input-container {
     font-size: 2.25rem;
+  }
+  .pac-item {
+    height: 60px;
+  }
+  .pac-item-query {
+    font-size: 1.5rem;
   }
 }
