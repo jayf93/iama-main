@@ -182,3 +182,9 @@ body {
     font-size: 1.5rem;
   }
 }
+
+button {
+  font-family: "Open Sans", sans-serif !important;
+  text-transform: inherit !important;
+  display: block !important;
+}

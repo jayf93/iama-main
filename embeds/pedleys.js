@@ -1,6 +1,6 @@
 // actions for when the window is ready
 let iama, aO, qO;
-$(window).ready(() => {
+$( window ).on( "load", () => {
   $('body').prepend(`<div class="row no-margin">
     <div class="col-lg-6 lime-sidebar-main">
       <span class="ml-2 d-none">Sidebar</span>
