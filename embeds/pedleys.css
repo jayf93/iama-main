@@ -23,6 +23,7 @@ body {
   background: none;
   transition: all 0.25s ease;
   border-radius: 10px;
+  margin-left: 0px !important;
 }
 .animate-message-action-button:hover {
   background: #FFF;
@@ -144,7 +145,7 @@ body {
 }
 
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 600px) {
 /* @media (min-width: 320px) { */
   .lime-sidebar-main {
     height: 15vh;
@@ -152,12 +153,13 @@ body {
   #iama-sidebar-text-na {
     height: auto !important;
     margin-top: 2vh;
+    font-size: 0.75rem;
   }
   .text-testimonial-container {
     display: none;
   }
   #iama {
-    height: 70vh !important;
+    height: 75vh !important;
   }
   #iama-inner-a {
     height: 60vh !important;
@@ -170,10 +172,10 @@ body {
     font-size: 5vw;
   }
   .iama-msg-step-count, .iama-next-step-btn {
-    font-size: 2rem;
+    font-size: 1rem;
   }
   .animate-message-action-button, .animate-message-input-container {
-    font-size: 2.25rem;
+    font-size: 1.25rem;
   }
   .pac-item {
     height: 60px;
@@ -181,10 +183,32 @@ body {
   .pac-item-query {
     font-size: 1.5rem;
   }
+  #gsearch-autocomplete {
+    font-size: 1rem;
+  }
+  .animate-message, .iama-inner-b {
+    padding: 3rem 1rem;
+  }
 }
 
 button {
   font-family: "Open Sans", sans-serif !important;
   text-transform: inherit !important;
   display: block !important;
+}
+
+
+.zsiq_float {
+  display: none !important;
+}
+
+.animate-button-carat {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  bottom: 0;
+}
+.animate-button-carat .caret.right {
+  position: absolute;
+  top: 50%;
 }

@@ -473,9 +473,9 @@ body {
   .animate-message-td {
   	width: 100% !important;
   }
-  .lime-sidebar-main {
+  /* .lime-sidebar-main {
   	display: none !important;
-  }
+  } */
   .animate-message {
     width: 100%;
     left: 0%;
