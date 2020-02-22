@@ -46,23 +46,23 @@ body {
   line-height: 40px;
 }
 
-.pedleys-hero-txt {
+.hero-txt {
   text-align: center;
 }
-.pedleys-hero-txt, .pedleys-lower-txt {
+.hero-txt, .pedleys-lower-txt {
   color: #fff;
 }
 .text-testimonial-container {
   text-align: center;
 }
 
-.pedleys-hero-txt, .pedleys-testimonial-container {
+.hero-txt, .pedleys-testimonial-container {
   padding-left: 2rem;
   padding-right: 2rem;
 }
 
 #iama-sidebar-text-na {
-  font-size: 2.5rem;
+  /* font-size: 2.5rem; */
   height: 85vh;
   display: flex;
   flex-direction: column;
@@ -78,11 +78,6 @@ body {
 
 #iama-txt {
   color: #FFF;
-}
-
-.xref-hero-txt, .xref-testimonial-container {
-  padding-left: 2rem;
-  padding-right: 2rem;
 }
 
 .xref-testimonial-txt {

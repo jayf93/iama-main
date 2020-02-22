@@ -104,7 +104,7 @@ class IAMA {
     this.history && this.history.length > 1 ? $('#iama-perm-back').fadeIn() : $('#iama-perm-back').fadeOut(); // if there is history then add the back button
 
     this.initListeners(); // reinitialise the event listeners to be able to action clicks
-    this.events.emit('any').emit(data.path); // leave this at the end to ensure optimal ability to mutate events
+    this.events.emit('any', Object.assign(data, { previous: props.previous })).emit(data.path, Object.assign(data, { previous: props.previous })); // leave this at the end to ensure optimal ability to mutate events
   }
 
   insertBackButton(p, d){

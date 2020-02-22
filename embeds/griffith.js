@@ -8,7 +8,7 @@ $(window).ready(() => {
         <img class="pedleys-logo" src="https://www.griffith.edu.au/__data/assets/file/0031/892363/Griffith-College-Logo-New.svg">
       </div>
       <div class="container" id="iama-sidebar-text-na" style="top:20%;">
-        <div class="pedleys-hero-txt">
+        <div class="hero-txt">
           <span>Let's get started! Answer the question on the right to <span class="griffith-red">study with Griffith.</span></span>
         </div>
       </div>
@@ -181,8 +181,74 @@ var setEvents = () => {
     })
   })
 
+  iama.events.on('any', e => assignToTopic(e))
 
+}
 
+const assignToTopic = ({ value, stage, stage_verbose, topic, previous }) => {
+
+  if (!stage || previous) return null;
+
+  const parsedTopic = topic.replace(/ /g, "_").toLowerCase();
+
+  stage = stage_verbose || stage;
+
+  const parsedStage = stage.replace(/ /g, "_").toLowerCase();
+
+  $('#iama-sidebar-text-na .hero-txt').remove();
+
+  if ($(`#topic-${parsedTopic}`).length) {
+    if ($(`#topic-${parsedTopic} #sub-${parsedStage}`).length) $(`#topic-${parsedTopic} #sub-${parsedStage}`).replaceWith(newSub(null, { value, stage, parsedStage }))
+    else newSub($(`#topic-${parsedTopic}`), { value, stage, topic, parsedStage });
+  } else {
+    $('#iama-sidebar-text-na').append(newTopic(topic, { value, stage, parsedStage, parsedTopic }))
+  }
+}
+
+const newTopic = (topic, { value, stage, parsedStage, parsedTopic }) => {
+  return `
+  <div id="topic-${parsedTopic}" class="iama-topic-container">
+    <div class="iama-topic-header">
+      <span>${topic}</span>
+    </div>
+    <div class="iama-topic-body">
+      <div class="iama-topic-row">
+        ${newSub(null, { value, stage, parsedStage })}
+      </div>
+    </div>
+  </div>
+  `
+}
+
+const newSub = ($el, { value, stage, parsedStage, topic }) => {
+  console.log('making new sub here')
+  let subHTML = `
+  <div class="iama-topic-sub" id="sub-${parsedStage}">
+    <div class="iama-topic-sub-stage-header">
+      <span>${stage}</span>
+    </div>
+    <div class="iama-topic-sub-stage-body">
+      <span>${value}</span>
+    </div>
+  </div>`
+
+  if (!$el) return subHTML;
+
+  console.log($el.find('.iama-topic-row:last > div'))
+
+  if ($el.find('.iama-topic-row:last > div').length > 1) {
+    console.log('already long enough')
+    console.log($el.find('.iama-topic-body'))
+    return $el.find('.iama-topic-body').append(`
+    <div class="iama-topic-row">
+      ${subHTML}
+    </div>
+    `)
+  } else {
+    $el.find('.iama-topic-row:last').append(subHTML)
+  }
+
+  return null;
 }
 
 const systemChoiceHtml = () => {

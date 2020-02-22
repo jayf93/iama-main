@@ -7,7 +7,9 @@ const pathObj = {
     }],
     data: {
       stage: "user_type",
-      id: "user_type"
+      id: "user_type",
+      topic: 'About you',
+      stage_verbose: 'I am a'
     }
   }],
   student_1: [{
@@ -21,7 +23,9 @@ const pathObj = {
     }],
     data: {
       stage: 'course',
-      id: 'course'
+      stage_verbose: 'I am interested in studying',
+      id: 'course',
+      topic: 'About you'
     }
   }],
   student_2: [{
@@ -32,7 +36,11 @@ const pathObj = {
     },{
       text: "Current/Past Student to Griffith College",
       path: 'student_current'
-    }]
+    }],
+    data: {
+      stage: 'student_type',
+      topic: 'a'
+    }
   }],
   student_new: [{
     message: "As a ____ student.",
@@ -42,7 +50,12 @@ const pathObj = {
     },{
       text: 'International',
       path: 'student_new_international'
-    }]
+    }],
+    data: {
+      stage: 'student_type_loc',
+      stage_verbose: "I am a ____ student",
+      topic: 'About you'
+    }
   }],
   student_new_domestic: [{
     message: "Currently, I am a...",
@@ -55,7 +68,10 @@ const pathObj = {
     },{
       text: 'High School Student',
       path: 'student_new_domestic_hss'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_new_domestic_mature: [{
     message: "Recently, I have been...",
@@ -71,14 +87,20 @@ const pathObj = {
     },{
       text: 'None of the above',
       path: 'student_new_domestic_mature_preapply'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_new_domestic_mature_preapply: [{
     message: 'Before applying you will need a copy of your academic transcript (if study), a work reference (if work), a character reference (if none), proof of citizenship, a copy of your CV and submit a short statement articulating how you will use the knowledge, skills, abilities and personal qualities gained through life experience to succeed in {course}',
     buttons: [{
       text: "Apply for {course}",
       path: 'fin'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_new_domestic_hsg: [{
     message: "After finishing high school I ____ receive a QCE or passes in at least three (3) academic subjects from Year 12",
@@ -88,7 +110,10 @@ const pathObj = {
     },{
       text: "Did not",
       path: "student_new_domestic_hss_dnp"
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_new_domestic_hsg_dp: [{
     message: "I have a copy of the following",
@@ -104,7 +129,8 @@ const pathObj = {
       }
     ],
     data: {
-      path: 'student_new_domestic_hsg_dp_preapply'
+      path: 'student_new_domestic_hsg_dp_preapply',
+      topic: 'a'
     }
   }],
   student_new_domestic_hsg_dp_preapply: [{
@@ -112,7 +138,10 @@ const pathObj = {
     buttons: [{
       text: "Applying through QTAC & Accepting your offer.",
       path: 'fin'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_new_domestic_hss: [{
     message: 'I ____ on finishing high school',
@@ -122,14 +151,20 @@ const pathObj = {
     },{
       text: "Do not intent",
       path: 'student_new_domestic_hss_dnp'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_new_domestic_hss_dp: [{
     message: 'Before you can begin your {course}, you will need to finish your high school education and recieve your QCE. Alternatively have passes in at least three (3) academic subjects from Year 12. Then apply through QTAC',
     buttons: [{
       text: 'QTAC Application',
       path: 'fin'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_new_domestic_hss_dnp: [{
     message: 'Before you can begin your {course}, you will need to take part in our Foundation Program. Alternativly you can apply after recieving 2 years work experience and are over the age of 19.',
@@ -139,14 +174,20 @@ const pathObj = {
     },{
       text: 'Learn more about Foundation',
       path: 'fin'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_new_domestic_hss_dnp: [{
     message: 'Before you can begin your {course}, you will need to finish your high school education and recieve your QCE. Alternatively have passes in at least three (3) academic subjects from Year 12. Then apply through QTAC',
     buttons: [{
       text: "QTAC Application",
       path: 'fin'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_new_international: [{
     message: "I am from...",
@@ -161,7 +202,10 @@ const pathObj = {
         value: 'nz',
         path: "student_new_international_2"
       }
-    ]
+    ],
+    data: {
+      topic: 'a'
+    }
   }],
   student_new_international_2: [{
     message: "I ____ meet the academic entry requirements {linked} reuqired for {course}",
@@ -171,7 +215,10 @@ const pathObj = {
     },{
       text: 'Do not',
       path: 'student_new_international_dnp'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_new_international_dp: [{
     message: 'I _____ meet the English language requirements {linked} reuqired for {course}',
@@ -181,7 +228,10 @@ const pathObj = {
     },{
       text: 'Do not',
       path: 'student_new_international_dp_ldnp'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_new_international_dp_ldp: [{
     message: 'I ____ done any additional study or work',
@@ -191,7 +241,10 @@ const pathObj = {
     },{
       text: 'Have not',
       path: 'student_new_international_dp_ldp_2'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_new_international_dp_ldp_2: [{
     message: 'I have a copy of the following',
@@ -204,7 +257,8 @@ const pathObj = {
       text: 'Credit Application Form (if answered above)'
     }],
     data: {
-      path: 'student_new_international_dp_ldp_preapply'
+      path: 'student_new_international_dp_ldp_preapply',
+      topic: "a"
     }
   }],
   student_new_international_dp_ldp_preapply: [{
@@ -215,7 +269,10 @@ const pathObj = {
     },{
       text: 'Applying through Griffith College Representative & Accepting your offer.',
       path: 'fin'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_new_international_dnp: [{
     message: 'Before you can begin your {course}, you will need to take part in our Foundation Program. Alternativly you can apply after recieving 2 years work experience and are over the age of 19.',
@@ -225,14 +282,20 @@ const pathObj = {
     },{
       text: 'Learn more about Foundation',
       path: 'fin'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_new_international_dp_ldnp: [{
     message: 'As you do not meet the English language requirements you can undertake an English intensive course at Griffith English Language Institute (GELI) prior to commencing your Griffith College program',
     buttons: [{
       text: 'Learn more about GELI',
       path: 'fin'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_current: [{
     message: "As a ____ student.",
@@ -242,7 +305,10 @@ const pathObj = {
     },{
       text: 'International',
       path: 'student_current_international'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_current_domestic: [{
     message: "Recently, I have been...",
@@ -258,14 +324,20 @@ const pathObj = {
     },{
       text: 'None of the above',
       path: 'student_current_domestic_preapply'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_current_domestic_preapply: [{
     message: 'Before applying you will need a copy of your academic transcript (if study), a work reference (if work), a character reference (if none), proof of citizenship, a copy of your CV and submit a short statement articulating how you will use the knowledge, skills, abilities and personal qualities gained through life experience to succeed in {course}. During the application process please include your Griffith College student number',
     buttons: [{
       text: "Apply for {course}",
       path: 'fin'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_current_international: [{
     message: "I am from...",
@@ -280,7 +352,10 @@ const pathObj = {
         value: 'nz',
         path: "student_current_international_2"
       }
-    ]
+    ],
+    data: {
+      topic: 'a'
+    }
   }],
   student_current_international_2: [{
     message: 'I ____ meet the academic entry requirements {linked} reuqired for {course}',
@@ -290,7 +365,10 @@ const pathObj = {
     },{
       text: 'Do not',
       path: 'student_current_international_dnp'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_current_international_dp: [{
     message: 'I ____ meet the English language requirements {linked} reuqired for {course}',
@@ -300,7 +378,10 @@ const pathObj = {
     },{
       text: 'Do not',
       path: 'student_current_international_dp_ldnp'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_current_international_dp_ldp: [{
     message: 'I have a copy of the following',
@@ -313,7 +394,8 @@ const pathObj = {
       text: 'Credit Application Form (if answered above)'
     }],
     data: {
-      path: 'student_current_international_dp_ldp_preapply'
+      path: 'student_current_international_dp_ldp_preapply',
+      topic: 'a'
     }
   }],
   student_current_international_dp_ldp_preapply: [{
@@ -321,14 +403,20 @@ const pathObj = {
     buttons: [{
       text: 'Applying through Griffith College & Accepting your offer.',
       path: 'fin'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_current_international_dp_ldnp: [{
     message: "As you do not meet the English language requirements you can undertake an English intensive course at Griffith English Language Institute (GELI) prior to commencing your Griffith College program",
     buttons: [{
       text: 'Learn more about GELI',
       path: "fin"
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   student_current_international_dnp: [{
     message: 'Before you can begin your {course}, you will need to take part in our Foundation Program. Alternativly you can apply after recieving 2 years work experience and are over the age of 19.',
@@ -338,7 +426,10 @@ const pathObj = {
     },{
       text: "Learn more about Foundation",
       path: 'fin'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   courses_1: [{
     message: 'I am interested in choosing a program...',
@@ -348,7 +439,10 @@ const pathObj = {
     },{
       text: 'Based on a career',
       path: 'courses_career'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   courses_interests: [{
     message: 'Select your main area of interest',
@@ -388,7 +482,10 @@ const pathObj = {
     },{
       text: 'Technology',
       path: 'courses_interests_2'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   courses_interests_2: [{
     message: 'Select an additional area of interest',
@@ -428,7 +525,10 @@ const pathObj = {
     },{
       text: 'Technology',
       path: 'courses_interests_3'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   courses_interests_3: [{
     message: 'Based on your interests we recommend a diploma of {1st} or, {2nd}',
@@ -447,7 +547,8 @@ const pathObj = {
     }],
     data: {
       stage: 'course',
-      id: 'course'
+      id: 'course',
+      topic: 'a'
     }
   }],
   courses_career: [{
@@ -476,7 +577,10 @@ const pathObj = {
     },{
       text: 'Design & Creative Arts',
       path: 'courses_career_1'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   courses_career_1: [{
     message: 'I am looking for a career in...',
@@ -491,7 +595,10 @@ const pathObj = {
         value: 'job2',
         path: "courses_career_final"
       }
-    ]
+    ],
+    data: {
+      topic: 'a'
+    }
   }],
   courses_career_final: [{
     message: 'Based on your interests we recommend a diploma of {1st}',
@@ -501,7 +608,10 @@ const pathObj = {
     }, {
       text: 'Learn more about {1st}',
       path: 'fin'
-    }]
+    }],
+    data: {
+      topic: 'a'
+    }
   }],
   fin: [{
     message: "Thank you.",
