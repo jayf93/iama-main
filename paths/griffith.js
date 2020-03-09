@@ -447,6 +447,63 @@ const pathObj = {
   courses_interests: [{
     message: 'Select your main area of interest',
     buttons: [{
+      text: 'Business',
+      path: 'courses_interests_2'
+    },{
+      text: 'Design & Creative Arts',
+      path: 'courses_interests_2'
+    },{
+      text: 'Law & Legal System',
+      path: 'courses_interests_2'
+    },{
+      text: 'Technology',
+      path: 'courses_interests_2'
+    },{
+      text: 'Science & Maths',
+      path: 'courses_interests_2'
+    },{
+      text: 'Health',
+      path: 'courses_interests_2'
+    }],
+    data: {
+      stage: 'course_a',
+      stage_verbose: "My first preference is",
+      topic: 'Interests'
+    }
+  }],
+  courses_interests_2: [{
+    message: 'Select your main area of interest',
+    buttons: [{
+      text: 'Business',
+      path: 'courses_interests_3'
+    },{
+      text: 'Design & Creative Arts',
+      path: 'courses_interests_3'
+    },{
+      text: 'Law & Legal System',
+      path: 'courses_interests_3'
+    },{
+      text: 'Technology',
+      path: 'courses_interests_3'
+    },{
+      text: 'Science & Maths',
+      path: 'courses_interests_3'
+    },{
+      text: 'Health',
+      path: 'courses_interests_3'
+    },{
+      text: 'None',
+      path: 'courses_interests_3'
+    }],
+    data: {
+      stage: 'course_b',
+      stage_verbose: "My second preference is",
+      topic: 'Interests'
+    }
+  }],
+  courses_interests_old: [{
+    message: 'Select your main area of interest',
+    buttons: [{
       text: 'Art & Design',
       path: 'courses_interests_2'
     },{
@@ -487,7 +544,7 @@ const pathObj = {
       topic: 'a'
     }
   }],
-  courses_interests_2: [{
+  courses_interests_2_old: [{
     message: 'Select an additional area of interest',
     buttons: [{
       text: 'Art & Design',
@@ -628,3 +685,135 @@ const pathObj = {
     }
   }]
 }
+
+const courseMatrix = {
+  commerce: {
+    verbose: 'Commerce',
+    matrix: [
+      [1,2,0],
+      [1,3,0],
+      [1,4,0],
+      [1,5,0],
+      [1,6,0],
+      [1,7,0],
+    ]
+  },
+  arts_n_comms: {
+    verbose: 'Arts & Communication',
+    matrix: [
+      [1,2,1],
+      [1,7,1],
+      [2,1,0],
+      [2,3,0],
+      [2,7,1],
+    ]
+  },
+  criminology: {
+    verbose: 'Criminology & Criminal Justice',
+    matrix: [
+      [1,3,1],
+      [2,3,2],
+      [3,1,0],
+      [3,2,0],
+      [3,4,0],
+      [3,5,0],
+      [3,7,0],
+      [5,3,1],
+    ]
+  },
+  it: {
+    verbose: 'Information Technology',
+    matrix: [
+      [1,4,1],
+      [2,4,1],
+      [2,5,0],
+      [4,1,0],
+      [4,2,1],
+      [4,3,0],
+      [4,5,1],
+      [4,6,0],
+      [4,7,0],
+    ]
+  },
+  science: {
+    verbose: 'Science',
+    matrix: [
+      [1,5,1],
+      [2,5,2],
+      [5,1,0],
+      [5,2,1],
+      [5,3,0],
+      [5,7,0],
+    ]
+  },
+  health_science: {
+    verbose: 'Health Sciences',
+    matrix: [
+      [1,5,2],
+      [1,6,1],
+      [2,6,1],
+      [3,5,1],
+      [3,6,1],
+      [4,6,2],
+      [5,1,1],
+      [5,6,0],
+      [6,1,0],
+      [6,2,1],
+      [6,3,0],
+      [6,4,0],
+      [6,5,0],
+      [6,7,1],
+    ]
+  },
+  design: {
+    verbose: 'Design',
+    matrix: [
+      [1,2,2],
+      [1,7,3],
+      [2,1,1],
+      [2,3,1],
+      [2,4,0],
+      [2,5,1],
+      [2,6,0],
+      [2,7,0],
+      [4,2,0],
+    ]
+  },
+  hotel_mgmt: {
+    verbose: 'Hotel Management',
+    matrix: [
+      [1,2,3],
+      [1,7,2]
+    ]
+  },
+  social_psycho_science: {
+    verbose: 'Social & Psychological Science',
+    matrix: [
+      [3,6,0]
+    ]
+  },
+  engineering: {
+    verbose: 'Engineering',
+    matrix: [
+      [4,1,2],
+      [4,5,0],
+      [4,6,1],
+      [5,2,0],
+      [5,4,0],
+      [5,7,1]
+    ]
+  },
+  health_care: {
+    verbose: 'Health Care',
+    matrix: [
+      [6,1,1],
+      [6,2,0],
+      [6,3,1],
+      [6,4,1],
+      [6,5,1],
+      [6,7,0]
+    ]
+  }
+}
+
+// Object.keys(courseMatrix).find(a => courseMatrix[a].matrix.find(([a1, a2, a3]) => a1 === 1 && a2 === 2))

@@ -116,15 +116,65 @@ var setEvents = () => {
     //   `)
   })
 
-  iama.events.on('last_quarterly_bill', e => {
-    // $('#iama-sidebar-text-na').html(`
-    //   <div class="your-ima-text"><span>Your IAMA</span></div>
-    //   <div id="iama-txt">
-    //    <span>Currently I have <span class="pedleys-orange">${iama.dataObj.start === "No solar" ? "no solar" : "an existing solar sytem"}</span> on my property at <span class="pedleys-orange">${iama.dataObj.address_short}</span> which I <span class="pedleys-orange">${iama.dataObj.property_status === "Pay rent" ? "rent" : "own"}</span>.</span>
-    //   </div>
-    //   `)
+  iama.events.on('courses_interests_2', e => {
+    console.log(e, 'EVENT HAPPENED')
+    let val = e.value;
+
+    console.log(val, "VAL IS HERE")
+
+    $(`[data-text="${val}"]`).remove();
   })
 
+  iama.events.on('courses_interests_3', async(e) => {
+
+    $('.animate-message-text, .animate-message-buttons').hide()
+
+    let interestArr = [0, 'Business', 'Design & Creative Arts', 'Law & Legal System', 'Technology', 'Science & Maths', 'Health', 'None'];
+
+    const { course_a, course_b } = iama.dataObj;
+
+    const v1 = interestArr.indexOf(course_a),
+          v2 = interestArr.indexOf(course_b);
+
+    console.log(v1, v2, 'INDEXES')
+
+    let optionVals = [];
+
+    await Object.keys(courseMatrix).forEach(course => {
+      let courseObj = courseMatrix[course]
+      let search = courseObj.matrix.find(([a1, a2, a3]) => a1 === v1 && a2 === v2);
+
+      if (search) optionVals.push({ course: courseObj.verbose, pos: search[2] });
+
+      return null;
+    })
+
+    // let vals = Object.keys(courseMatrix).find(a => courseMatrix[a].matrix.find(([a1, a2, a3]) => a1 === v1 && a2 === v2))
+    //
+    optionVals = optionVals.sort((a,b) => a.pos > b.pos ? 1 : -1);
+    console.log(optionVals, 'VALS ARE HERE')
+
+    let [ o1, o2, o3, o4 ] = optionVals;
+
+    let text;
+
+    if (!o2) text = `Based on your interests we recommend a Diploma of ${o1.course}`;
+    else text = `Based on your interests we recommend a Diploma of ${o1.course} or ${o2.course}`;
+
+    $('.animate-message-text').text(text);
+
+    let $btns = $('.animate-message-buttons .animate-message-action-button');
+
+    console.log($btns)
+
+    $($btns[0]).find('span').text(`Applying for Diploma of ${o1.course}`)
+    $($btns[1]).find('span').text(`Applying for Diploma of ${o2.course}`)
+    $($btns[2]).find('span').text(`Learn more about ${o1.course}`)
+    $($btns[3]).find('span').text(`Learn more about ${o2.course}`)
+
+    $('.animate-message-text, .animate-message-buttons').fadeIn();
+
+  })
 
 
   iama.events.on('property_wiring', e => {
