@@ -185,7 +185,7 @@ class IAMA {
     }
   }
   manageRoutes(e){
-    let $el = $(e.target),
+    let $el = $(e.target).parents('[data-currentPath]').length ? $(e.target).parents('[data-text]') : $(e.target),
         data = $el.data(); // define the target and its data object
 
     data.value = data.value || data.text || $el.val(); // assign a data value if one is not present
@@ -249,7 +249,7 @@ class AnimateMessage {
       if (button.type === "web_url") { // action if the button should link to a URL instead of a path
         html+= `<div class="animate-message-td"><a href="${button.url}"><div><button class="button animate-message-action-button" data-currentPath="${this.currentPath}" data-text="${button.text}" data-path="${button.path}" ${this.returnDataParams(data)}>${button.text}<div class="animate-button-carat"><i class="caret right"></i></div></button></div></a></div>` // url button template
       } else {
-        html+= `<div class="animate-message-td"><button class="button animate-message-action-button" data-currentPath="${this.currentPath}" data-text="${button.text}" data-path="${button.path}" ${this.returnDataParams(data)}>${button.text}<div class="animate-button-carat"><i class="caret right"></i></div></button></div>` // primary button template
+        html+= `<div class="animate-message-td"><button class="button animate-message-action-button" data-currentPath="${this.currentPath}" data-text="${button.text}" data-path="${button.path}" ${this.returnDataParams(data)}><span>${button.text}</span><div class="animate-button-carat"><i class="caret right"></i></div></button></div>` // primary button template
       }
 
     })
