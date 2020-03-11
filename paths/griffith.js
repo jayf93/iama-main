@@ -588,20 +588,22 @@ const pathObj = {
     }
   }],
   courses_interests_3: [{
-    message: 'Based on your interests we recommend a diploma of {1st} or, {2nd}',
-    buttons: [{
-      text: 'Applying for {1st}',
-      path: 'student_2'
-    },{
-      text: 'Applying for {2nd}',
-      path: 'student_2'
-    },{
-      text: 'Learn more about {1st}',
-      path: 'fin'
-    },{
-      text: 'Learn more about {2nd}',
-      path: 'fin'
-    }],
+    message: 'Based on your interests we recommend...',
+    buttons: [
+    //   {
+    //   text: 'Applying for {1st}',
+    //   path: 'student_2'
+    // },{
+    //   text: 'Applying for {2nd}',
+    //   path: 'student_2'
+    // },{
+    //   text: 'Learn more about {1st}',
+    //   path: 'fin'
+    // },{
+    //   text: 'Learn more about {2nd}',
+    //   path: 'fin'
+    //   }
+    ],
     data: {
       stage: 'course',
       id: 'course',
@@ -689,6 +691,8 @@ const pathObj = {
 const courseMatrix = {
   commerce: {
     verbose: 'Commerce',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+    link: 'https://www.griffith.edu.au/college',
     matrix: [
       [1,2,0],
       [1,3,0],
@@ -700,6 +704,8 @@ const courseMatrix = {
   },
   arts_n_comms: {
     verbose: 'Arts & Communication',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+    link: 'https://www.griffith.edu.au/college',
     matrix: [
       [1,2,1],
       [1,7,1],
@@ -710,6 +716,8 @@ const courseMatrix = {
   },
   criminology: {
     verbose: 'Criminology & Criminal Justice',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+    link: 'https://www.griffith.edu.au/college',
     matrix: [
       [1,3,1],
       [2,3,2],
@@ -723,6 +731,8 @@ const courseMatrix = {
   },
   it: {
     verbose: 'Information Technology',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+    link: 'https://www.griffith.edu.au/college',
     matrix: [
       [1,4,1],
       [2,4,1],
@@ -737,6 +747,8 @@ const courseMatrix = {
   },
   science: {
     verbose: 'Science',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+    link: 'https://www.griffith.edu.au/college',
     matrix: [
       [1,5,1],
       [2,5,2],
@@ -748,6 +760,8 @@ const courseMatrix = {
   },
   health_science: {
     verbose: 'Health Sciences',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+    link: 'https://www.griffith.edu.au/college',
     matrix: [
       [1,5,2],
       [1,6,1],
@@ -767,6 +781,8 @@ const courseMatrix = {
   },
   design: {
     verbose: 'Design',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+    link: 'https://www.griffith.edu.au/college',
     matrix: [
       [1,2,2],
       [1,7,3],
@@ -781,6 +797,8 @@ const courseMatrix = {
   },
   hotel_mgmt: {
     verbose: 'Hotel Management',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+    link: 'https://www.griffith.edu.au/college',
     matrix: [
       [1,2,3],
       [1,7,2]
@@ -788,12 +806,16 @@ const courseMatrix = {
   },
   social_psycho_science: {
     verbose: 'Social & Psychological Science',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+    link: 'https://www.griffith.edu.au/college',
     matrix: [
       [3,6,0]
     ]
   },
   engineering: {
     verbose: 'Engineering',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+    link: 'https://www.griffith.edu.au/college',
     matrix: [
       [4,1,2],
       [4,5,0],
@@ -805,6 +827,8 @@ const courseMatrix = {
   },
   health_care: {
     verbose: 'Health Care',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+    link: 'https://www.griffith.edu.au/college',
     matrix: [
       [6,1,1],
       [6,2,0],

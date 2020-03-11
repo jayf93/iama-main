@@ -186,10 +186,10 @@ class IAMA {
   }
   manageRoutes(e){
     let $el = $(e.target).parents('[data-currentPath]').length ? $(e.target).parents('[data-text]') : $(e.target),
-        data = $el.data(); // define the target and its data object
+        data = $el.data() || {}; // define the target and its data object
 
     data.value = data.value || data.text || $el.val(); // assign a data value if one is not present
-    this.dataObj[data.stage] = data.value;
+    if (data.stage) this.dataObj[data.stage] = data.value;
 
     this.logPixelEvent(data); // log the callback data for tracking
     this.updateSidebar(data);

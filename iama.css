@@ -593,3 +593,21 @@ body {
 .iama-topic-row {
   display: flex;
 }
+
+
+
+/* CARDS  */
+.animate-message-card {
+  padding: 20px;
+  background: #FFF;
+  border: 1px solid #9b9b9b;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.animate-message-card-header {
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+.animate-message-card-body {
+  margin-bottom: 15px;
+}

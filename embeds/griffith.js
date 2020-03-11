@@ -124,6 +124,22 @@ var setEvents = () => {
 
   iama.events.on('courses_interests_3', async(e) => {
 
+    const courseCard = course => {
+      return `
+        <div class="animate-message-card" data-currentPath="courses_interests_3" data-previous="true" data-path="student_2" data-text="${course.verbose}" data-stage_verbose="I am interested in studying" data-topic="Course">
+          <div class="animate-message-card-header">
+            <span>${course.verbose}</span>
+          </div>
+          <div class="animate-message-card-body">
+            <span>${course.description}</span>
+          </div>
+          <div class="animate-message-card-actions">
+            <div class="btn btn-secondary btn-iama-action" data-course="${course.verbose}">Choose course</div><a href="${course.link}" target="_blank" style="margin-left:10px;"><div class="btn">Learn more</div></a>
+          </div>
+        </div>
+      `
+    }
+
     $('.animate-message-text, .animate-message-buttons').hide()
 
     let interestArr = [0, 'Business', 'Design & Creative Arts', 'Law & Legal System', 'Technology', 'Science & Maths', 'Health', 'None'];
@@ -139,7 +155,7 @@ var setEvents = () => {
       let courseObj = courseMatrix[course]
       let search = courseObj.matrix.find(([a1, a2, a3]) => a1 === v1 && a2 === v2);
 
-      if (search) optionVals.push({ course: courseObj.verbose, pos: search[2] });
+      if (search) optionVals.push({ course: courseObj.verbose, pos: search[2], ...courseObj });
 
       return null;
     })
@@ -150,19 +166,35 @@ var setEvents = () => {
 
     let text;
 
-    if (!o2) text = `Based on your interests we recommend a Diploma of ${o1.course}`;
-    else text = `Based on your interests we recommend a Diploma of ${o1.course} or ${o2.course}`;
+    console.log(optionVals, "VALS ARE HERE")
 
-    $('.animate-message-text').text(text);
+    optionVals.forEach(course => $('.animate-message-buttons').append(courseCard(course)))
+
+    // if (!o2) text = `Based on your interests we recommend a Diploma of ${o1.course}`;
+    // else text = `Based on your interests we recommend a Diploma of ${o1.course} or ${o2.course}`;
+    //
+    // $('.animate-message-text').text(text);
 
     let $btns = $('.animate-message-buttons .animate-message-action-button');
 
-    $($btns[0]).find('span').text(`Applying for Diploma of ${o1.course}`)
-    $($btns[1]).find('span').text(`Applying for Diploma of ${o2.course}`)
-    $($btns[2]).find('span').text(`Learn more about ${o1.course}`)
-    $($btns[3]).find('span').text(`Learn more about ${o2.course}`)
+    // $($btns[0]).find('span').text(`Applying for Diploma of ${o1.course}`)
+    // $($btns[1]).find('span').text(`Applying for Diploma of ${o2.course}`)
+    // $($btns[2]).find('span').text(`Learn more about ${o1.course}`)
+    // $($btns[3]).find('span').text(`Learn more about ${o2.course}`)
 
     $('.animate-message-text, .animate-message-buttons').fadeIn();
+
+    $('.btn-iama-action').click(e => {
+      // student_2
+      console.log('clicked!')
+
+      let { course } = $(e.target).data();
+
+      iama.dataObj.course = course;
+
+      iama.manageRoutes(e);
+
+    })
 
   })
 
