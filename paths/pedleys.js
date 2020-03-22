@@ -58,11 +58,16 @@ const pathObj = {
     }
   }],
   last_quarterly_bill: [{
-    message: "and my last quarterly bill was",
+    message: "and my last quarterly bill was $___",
     template_type: 'input',
     input: {
       placeholder: "Enter amount",
-      path: "property_type"
+      path: "property_type",
+      validation: {
+        pattern: '^[0-9]*$',
+        message: 'Error: field must only be a number'
+      },
+
     },
     data: {
       stage: "last_quarterly_bill",

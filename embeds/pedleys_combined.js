@@ -31,7 +31,7 @@ class IAMA {
   generateRandomId(len = 30){ // generates a random id for the user or session ID for tracking
     var dec2hex = dec => {
     	return ('0' + dec.toString(16).substr(-2))
-    }
+    };
     let arr = new Uint8Array((len || 30) / 2);
     window.crypto.getRandomValues(arr);
     return Array.from(arr, dec2hex).join('');
@@ -43,7 +43,7 @@ class IAMA {
     let user = localStorage.getItem('iama-user'); // check if the user cookie exists
     if (!user) { // if no user, create one
       user = this.generateRandomId();
-      localStorage.setItem('iama-user', user)
+      localStorage.setItem('iama-user', user);
     }
     return user;
   }
@@ -59,8 +59,8 @@ class IAMA {
       _this.logPixelEvent({
         stage: 'end_session',
         value: 'end_session'
-      })
-    })
+      });
+    });
   }
   logPixelEvent(data){ // logs all event callbacks and data to pixel
     // build up the pixel url
@@ -78,7 +78,7 @@ class IAMA {
     if (!data.path || data.path === "undefined" || data.end) return this.triggerEnd(this.dataObj); // will trigger an end of path callback
 
     let path = this.pathObj[data.path][0]; // the path from the action
-    console.log(this.history.length)
+
     let m = new AnimateMessage(Object.assign(path, { previous: data.path }), data.path, this).render(); // render the path
     // $(this.container).html(m); // add it to the form
     $(this.container).hide().html(m).fadeIn();
@@ -86,11 +86,11 @@ class IAMA {
       this.history.push(Object.assign(path, { path: data.path })); //if not a back action, push this to history
       $('.iama-perm-progress-bar').animate({
         width: $('.iama-perm-progress-bar').width((i, val) => val+= $('.iama-perm-progress-bar').width() >= $('.iama-perm-progress').width() ? 0 : ($('.iama-perm-progress').width() * (this.stepPercentage / 100)))
-      })
+      });
     } else {
       $('.iama-perm-progress-bar').animate({
         width: $('.iama-perm-progress-bar').width((i, val) => val-= $('.iama-perm-progress-bar').width() <= 0 ? 0 : ($('.iama-perm-progress').width() * (this.stepPercentage / 100)))
-      })
+      });
     }
 
     this.history && this.history.length > 1 ? $('#iama-perm-back').fadeIn() : $('#iama-perm-back').fadeOut(); // if there is history then add the back button
@@ -106,14 +106,14 @@ class IAMA {
   handleBack(e){
     this.history.pop(); // pop the latest option out of the history
     let path = this.getPrevious(); // get the object of the previous path from aF
-    console.log(path)
+    console.log(path);
     this.handleSidebarReverse(path); // function to remove the options in the sidebar to match the step back
     let p = this.history[this.history.length - 1];
     this.switchPath(this.history[this.history.length - 1], { previous: true }); // switches path, and also passes the previous boolean
 
   }
   handleSidebarReverse(path){
-    $(`[data-step="${path.path}"]`).fadeOut('normal', function(){ $(this).remove() });
+    $(`[data-step="${path.path}"]`).fadeOut('normal', () => $(this).remove() );
   }
 
   getPathObj(){
@@ -122,7 +122,7 @@ class IAMA {
       if (_this.pathObj) resolve(_this.pathObj);
       else $.get(`https://7yax6waadk.execute-api.ap-southeast-2.amazonaws.com/default/iama-flow-retrieve/${_this.project}/${_this.flowId}`, v => {
         resolve(v && v.result ? JSON.parse(v.result) : {});
-      })
+      });
     });
   }
 
@@ -130,16 +130,16 @@ class IAMA {
     this.getPathObj() // grab the local or remote path file
     .then(path => {
       this.pathObj = path;
-      let initMsg = path[this.start][0] // intial path is loaded
-      let a = new AnimateMessage(initMsg, this.start, this).render() // initial path is rendered
+      let initMsg = path[this.start][0]; // intial path is loaded
+      let a = new AnimateMessage(initMsg, this.start, this).render(); // initial path is rendered
       $(this.container).html(`<div id="iama-inner-a" class="iama-inner-a"></div><div id="iama-inner-b" class="iama-inner-b"><div id="iama-perm-progress" class="iama-perm-progress"><div class="iama-perm-progress-bar"></div></div>${this.insertBackButton()}</div>`); // insert the new containers
       this.container = "#iama-inner-a"; // update the container
       $(this.container).hide().html(a).fadeIn(); // add it to the form
       $('#iama-perm-back').click(e => this.handleBack(e)); // add listeners to the back button
-      this.history.push(Object.assign(initMsg, { path: this.start }))
-      this.initListeners() // initialise the event listeners to be able to action clicks
+      this.history.push(Object.assign(initMsg, { path: this.start }));
+      this.initListeners(); // initialise the event listeners to be able to action clicks
       this.initPixel();
-    })
+    });
   }
   triggerCallback(){ // trigger a callback when a button is clicked
     // this is to be overwritten with a function via the options
@@ -160,7 +160,23 @@ class IAMA {
     if ($('.animate-message-action-button')) $('.animate-message-action-button').off().click(e => this.manageRoutes(e)); // reset the on-click listeners
     if ($('.animate-message-action-checkbox')) $('.animate-message-action-checkbox, .animate-button-carat').off().click(e => this.manageChecks(e));
     if ($('.animate-message-action-input')) {
-      $('.animate-message-action-input').off().on('keypress', e => e.which === 13 ? this.manageRoutes(e) : null)
+      $('.animate-message-action-input').off().on('keypress', e => {
+        if (e.which === 13) {
+          let { validation, validation_msg } = $(e.target).data();
+
+          if (!validation) return this.manageRoutes(e);
+
+          let regex = new RegExp(validation),
+              val = $(e.target).val();
+
+          if (validation && !val.match(regex)) {
+
+            return $('.iama-input-err-container').html(`<span>${validation_msg || "Error: Invalid entry"}</span>`);
+
+          } else return this.manageRoutes(e);
+        } else return null;
+        // e.which === 13 ? this.manageRoutes(e) : null
+      })
       $('.animate-message-action-input').focus();
     }
     if ($('.animate-message-action-select')) $('.animate-message-action-select').off().change(e => $(e.target).data($(e.target).find(':selected').data()) && this.manageRoutes(e));
@@ -249,7 +265,7 @@ class AnimateMessage {
     return html // pass the button html back
   }
   addInput(input = {}, data = {}) {
-    return `<div class="animate-message-input-container"><input class="animate-message-action-input" type="text" placeholder="${input.placeholder || ""}" data-currentPath="${this.currentPath}" data-path="${input.path}" ${this.returnDataParams(data)}></input>      <div class="iama-next-btn-container">
+    return `<div class="animate-message-input-container"><input class="animate-message-action-input" type="text" placeholder="${input.placeholder || ""}" data-currentPath="${this.currentPath}" data-path="${input.path}" data-validation="${input.validation && input.validation.pattern}" data-validation_msg="${input.validation && input.validation.message}" ${this.returnDataParams(data)}></input><div class="iama-input-err-container"></div>      <div class="iama-next-btn-container">
               <button class="button animate-message-action-button iama-next-step-btn" data-currentPath="${this.currentPath}" data-path="${input.path}" ${this.returnDataParams(data)}>Next step</div>
             </div></div>`
   }
@@ -545,14 +561,47 @@ var setEvents = () => {
   })
 
   iama.events.on('contact_detail', e => {
+    console.log('CONTACT DETAIL HERE')
+    let emailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
+        phoneRegex = new RegExp(/^[+\d](?:.*\d)?$/);
+
     $('.animate-message-buttons').replaceWith(contactHtml());
     $('.iama-next-step-btn').click(e => {
-      let data = { custom_system: true };
+      let data = { custom_system: true },
+          invalid = false;
       $('.animate-message-action-input').each((i, el) => {
         console.log($(el).data())
-        let key = $(el).data('prop');
+        let key = $(el).data('prop'),
+            { validation } = $(el).data();
+
+        switch (validation) {
+          case 'email':
+            if ($(el).val().match(emailRegex)) $(el).parents('.animate-message-input-container').find('.iama-input-err-container').html('');
+            else {
+              console.log('No email match')
+              invalid = true;
+              $(el).parents('.animate-message-input-container').find('.iama-input-err-container').html('<span>Please enter a valid email address</span>')
+            }
+          break;
+          case 'phone':
+            if ($(el).val().match(phoneRegex)) $(el).parents('.animate-message-input-container').find('.iama-input-err-container').html('');
+            else {
+              console.log('No phone match')
+              invalid = true;
+              $(el).parents('.animate-message-input-container').find('.iama-input-err-container').html('<span>Please enter a valid phone number</span>')
+            }
+          break;
+          default:
+            console.log('no validation')
+            // do nothing
+          break;
+        }
+
         Object.assign(data, { [key]: $(el).val() });
       })
+
+      if (invalid) return null;
+
       Object.assign(iama.dataObj, data)
       iama.manageRoutes(e);
     })
@@ -586,10 +635,18 @@ const contactHtml = () => {
   return `
       <div class="animate-message-input-container">
         <span class="pedleys-system-text">First name</span>
-        <input style="margin-top:0.5rem;" data-prop="contact_name" class="animate-message-action-input" type="text" placeholder="Enter your name"></input></div>
+        <input style="margin-top:0.5rem;" data-prop="contact_name" class="animate-message-action-input" type="text" placeholder="Enter your name"></input>
+      </div>
       <div class="animate-message-input-container">
-        <span class="pedleys-system-text">Phone or Email Address</span>
-        <input style="margin-top:0.5rem;" data-prop="contact_detail" class="animate-message-action-input" type="text" placeholder="Enter email address or phone number"></input></div>
+        <span class="pedleys-system-text">Email Address</span>
+        <input style="margin-top:0.5rem;" data-prop="email_address" class="animate-message-action-input" type="text" placeholder="Enter your email address" data-validation="email"></input>
+        <div class="iama-input-err-container"></div>
+      </div>
+      <div class="animate-message-input-container">
+        <span class="pedleys-system-text">Phone Number</span>
+        <input style="margin-top:0.5rem;" data-prop="phone_number" class="animate-message-action-input" type="text" placeholder="Enter your phone number" data-validation="phone"></input>
+        <div class="iama-input-err-container"></div>
+      </div>
       <div class="iama-next-btn-container">
         <button class="button iama-next-step-btn" data-path="">Next step</div>
       </div>
@@ -675,11 +732,23 @@ const sendIama = () => {
 
 }
 
+const sendZap = () => {
+  let url = 'https://hooks.zapier.com/hooks/catch/6970822/o1kbgsw/',
+      data = iama.dataObj;
+      console.log('sending a zap')
+  return $.ajax({
+    type: 'POST',
+    url,
+    data: JSON.stringify(data),
+    dataType: 'json'
+  })
+}
 
 var parseEnd = e => { // triggered at the end of the flow
 
   sendIama();
   sendEnquiry();
+  sendZap();
 
   setTimeout(function(){ // slight delay to ensure that the dataObject is correctly populated
 

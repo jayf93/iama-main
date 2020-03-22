@@ -212,3 +212,10 @@ button {
   position: absolute;
   top: 50%;
 }
+
+.iama-input-err-container {
+  font-size: 12px;
+  margin-left: 10px;
+  font-weight: 600;
+  color: rgba(255,0,0,1);
+}
